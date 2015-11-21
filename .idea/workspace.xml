@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d4141b26-587e-42d0-90e8-195540337dcc" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.meteor/.gitignore" afterPath="$PROJECT_DIR$/.meteor/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="untitled4.iws" />
@@ -416,7 +415,13 @@
       <option name="project" value="LOCAL" />
       <updated>1448117573037</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="git ignore set">
+      <created>1448117843930</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1448117843930</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -456,7 +461,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="test commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="test commit" />
+    <MESSAGE value="git ignore set" />
+    <option name="LAST_COMMIT_MESSAGE" value="git ignore set" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
