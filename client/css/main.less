@@ -1,0 +1,192 @@
+@height:40px;
+@offset: 50px;
+@color: #FFFF00;
+@color1: #ffd180 ;
+@color2: #f6ba52;
+@color3: #c38108;
+
+a{
+ text-decoration: none !important
+}
+a:hover{
+    text-decoration: none !important
+}
+.skedList{
+    text-align: left;
+}
+
+
+.countainer{
+    margin: 15px;
+    width: 1050px;
+}
+
+.title{
+    text-align: right;
+
+}
+
+.dayName{
+    text-align: center;
+    background-color: rgba(248,199,66,0.40);
+    border-radius: 10px;
+    width: inherit;
+    margin-top: 20px;
+    page-break-inside: avoid;
+}
+
+.dayString{
+    margin: auto;
+
+    display: inline-block;
+    border-radius: 10px;
+    margin-top: 10px;
+
+}
+
+.dayString h4{
+    text-align: center;
+    margin: auto;
+    color: @color3;
+}
+
+.day {
+    opacity: 0.9;
+    width:864px;
+    height: @height;
+    background: repeating-linear-gradient(
+            to right,
+            @color2,
+            @color2 36px,
+            @color1 36px,
+            @color1 72px
+    );
+    float: left;
+}
+
+.time_line{
+    position: absolute;
+    height: @height;
+    z-index: -1;
+    left: @offset+10+15;
+}
+
+.hour{
+    float: left;
+    width: 36px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.bort{
+    margin: 10px;
+    height: @height+10;
+    opacity: 0.9;
+}
+
+.rect {
+    background-color: @color;
+    width: 360px;
+    height: @height;
+    z-index: 10;
+    cursor: pointer;
+    text-align: center;
+    overflow: hidden;
+    left: 0px;
+    font-size: 10px;
+    position: absolute;
+}
+
+.textRow{
+
+    vertical-align: middle;
+}
+
+input{
+    width: 70px !important;
+}
+
+.left_col{
+    text-align: center;
+    padding: 5px;
+    width:  @offset;
+    overflow: hidden;
+    float: left;
+    background-color: @color;
+    height: @height;
+    display: block;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.duration{
+    background-color: @color;
+    width: 90px;
+    float: left;
+    padding: 5px;
+    text-align: center;
+    height: @height;
+    display: block;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.btn_board{
+    text-align: center;
+}
+
+.btn {
+    background-color: @color2;
+}
+.btn:focus {
+    background-color: @color1;
+    border: solid  @color2 1px ;
+    outline: solid  @color2 1px;
+}
+
+.delBort{
+    padding-top: 10px;
+    cursor: pointer;
+
+}
+.hide{
+    display: none;
+}
+fieldset input{
+    width: 100% !important;
+}
+.navbar{
+    margin-bottom: 0 !important;
+}
+.navbar a {
+    cursor: pointer;
+}
+.nav h2{
+    line-height: 0;
+    padding-right: 20px;
+}
+.backPane{
+    background-image: url("/img/windrose.png");
+    background-size: cover;
+    width: 100%;
+    height: 700px;
+}
+
+@media print
+{
+    .ui-resizable-handle{
+        display: none !important;
+    }
+
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+
+    .rect{
+        border: 1px solid black;
+        height: 48px;
+    }
+    .bort{
+        border: 1px solid black;
+    }
+}
+

@@ -1,0 +1,89 @@
+<template name="skedList">
+    <ul>
+        <li id="{{_id}}"><a href="{{pathFor 'skeds'}}"> <p class="skedList">{{title}} створено:{{date}} <span  datafld="{{_id}}" class="close cls">&times;</span></p></a>  </li>
+    </ul>
+
+</template>
+
+
+<template name="sked">
+
+    <div id={{_id}} class="countainer">
+        <h1 class="title">{{title}}.</h1>
+        {{#each week}}
+            {{> day}}
+        {{/each}}
+
+        <div class="btn_board no-print">
+            <button data-toggle="modal" data-target="#myModal" class="btn"  type="button" id="open" >Відкрити</button>
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Відкрити:</h4>
+                        </div>
+                        <div class="modal-body">
+                            {{#each skedListObj}}
+                                {{> skedList}}
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn saveAs" >Зберегти як...</button>
+            <button class="btn addBort">Додати ПС</button>
+            <button class="btn hide reset">Очистить все</button>
+        </div>
+    </div>
+</template>
+
+<template name="day">
+    <div class="dayName" id="{{_id}}">
+        <div class="dayString"> <h4>{{dayToString}}</h4> </div>
+        {{#each bort}}
+            {{> borts}}
+        {{/each}}
+    </div>
+</template>
+
+<template name="hour">
+    <div class="hour no-print">{{hour}}</div>
+</template>
+
+
+<template name="rect">
+    <div  id="{{_id}}" style="width: {{width}}px; left: {{left}}px ;" class="rect ">
+        <span>{{> editableText  collection="data" field="fltNumber"}}</span>
+        <br/>
+        <span style="float:left">{{depTime}}</span>
+        <span style="float:right">{{arrTime}}</span>
+        <br/>
+         <span class="textRow"> {{> editableText  collection="data" field="direction"}}
+         </span>
+    </div>
+</template>
+
+
+<template name="borts">
+    <div class="bort">
+
+        <div class="left_col">{{> editableText  collection="data" field="bort"}} </div>
+
+        <div class="time_line">
+            {{#each time}}
+                {{> hour}}
+            {{/each}}
+        </div>
+
+        <div class="day" id="{{createdAt}}" onmousedown="return false" onselectstart="return false">
+            {{#each flight}}
+                {{> rect}}
+            {{/each}}
+        </div>
+        <div class="duration">{{ttlDuration}} годин</div>
+        <div datafld="{{_id}}" class="delBort no-print">&times;</div>
+    </div>
+</template>
+

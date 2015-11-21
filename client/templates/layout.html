@@ -1,0 +1,30 @@
+<template name="layout">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <div class="navbar-brand">
+                {{>loginButtons right}}
+                </div>
+            </div>
+                <div>
+                <ul class="nav navbar-nav">
+                    <li><a class="addBort">Додати ПС</a></li>
+                    <li><a class="saveAs">Зберегти як...</a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#myModal"  type="button" id="open" >Відкрити</a></li>
+                    <li><a id="dovid">Довідник</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <h2></h2>
+                </ul>
+                </div>
+            </div>
+
+    </nav>
+ {{#if currentUser}}
+    {{> yield}}
+ {{else}}
+     <div class="backPane"></div>
+
+ {{/if}}
+</template>
