@@ -74,3 +74,8 @@ Template.rect.onRendered(function(){
     }
 );
 
+Template.layout.helpers({
+    skedInfo: function(){
+        return Data.find({name:'time'})
+    }
+});

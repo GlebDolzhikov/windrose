@@ -12,7 +12,29 @@
                     <li><a class="addBort">Додати ПС</a></li>
                     <li><a class="saveAs">Зберегти як...</a></li>
                     <li><a href="#" data-toggle="modal" data-target="#myModal"  type="button" id="open" >Відкрити</a></li>
-                    <li><a id="dovid">Довідник</a></li>
+                    <li><a  data-toggle="modal" data-target="#myModal2" id="dovid">Довідник</a></li>
+
+                    <div id="myModal2" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Довідник:</h4>
+                                    <p>Час зазначений у довіднику, впливає на час рейсу при додаванні або зміні маршруту</p>
+                                </div>
+                                <div class="modal-body">
+                                    <ul>
+                                    {{#each skedInfo}}
+                                        {{> route}}
+                                    {{/each}}
+                                    </ul>
+                                    <button class="btn addTimeBlock">Додати</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <h2></h2>

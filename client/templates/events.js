@@ -37,11 +37,13 @@ Template.layout.events({
             Router.go('/sked/' + result); });
 
     },
-    'click #dovid': function(){
+    'click .addTimeBlock': function(){
         var input = prompt('Задайте тайм блок, у форматі KBPAYT,200(час у хвилинах)');
-        var direction = input.split(',')[0];
+        var direction = input.split(',')[0].toUpperCase();
         var time = input.split(',')[1];
         Meteor.call('addTime',direction,time);
+        console.log(direction);
+        Meteor.call('updAllFltLength',direction,time);
     }
 });
 
@@ -61,5 +63,11 @@ Template.rect.events({
     },
     'change .textRow>input':function(e){
         Meteor.call('updFltLength',e.target.value,$(e.target).parent().parent()[0].id)
+    }
+});
+
+Template.route.events({
+    'click .cls':function(){
+        Meteor.call('delFlt', this._id)
     }
 });
