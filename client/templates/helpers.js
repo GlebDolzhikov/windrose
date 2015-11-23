@@ -1,9 +1,6 @@
 Template.sked.helpers({
     week:function(){
         return Data.find({name:'day'});
-    },
-    skedListObj:function(){
-        return Data.find({name:'sked'},{sort:{cretedAt:-1}});
     }
 });
 
@@ -77,5 +74,8 @@ Template.rect.onRendered(function(){
 Template.layout.helpers({
     skedInfo: function(){
         return Data.find({name:'time'})
+    },
+    skedListObj:function(){
+        return Data.find({name:'sked'},{sort:{cretedAt:-1}});
     }
 });

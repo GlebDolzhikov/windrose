@@ -26,3 +26,8 @@ less
 iron:router
 accounts-ui
 accounts-password
+netanelgilad:excel
+netanelgilad:mkdirp
+vsivsi:file-collection
+netanelgilad:node-uuid
+kevohagan:sweetalert

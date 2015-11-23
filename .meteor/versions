@@ -18,6 +18,7 @@ caching-compiler@1.0.0
 caching-html-compiler@1.0.2
 callback-hook@1.0.4
 check@1.0.6
+coffeescript@1.0.10
 dburles:mongo-collection-instances@0.3.4
 ddp@1.2.2
 ddp-client@1.2.1
@@ -49,6 +50,7 @@ iron:middleware-stack@1.0.11
 iron:router@1.0.12
 iron:url@1.0.11
 jquery@1.11.4
+kevohagan:sweetalert@1.0.0
 lai:collection-extensions@0.1.4
 launch-screen@1.0.4
 less@2.5.0_3
@@ -65,6 +67,9 @@ mongo@1.1.2
 mongo-id@1.0.1
 mrt:jquery-ui@1.9.2
 nerdmed:jquery-resize@0.5.3
+netanelgilad:excel@0.2.4
+netanelgilad:mkdirp@0.0.1
+netanelgilad:node-uuid@1.0.2
 npm-bcrypt@0.7.8_2
 npm-mongo@1.4.39_1
 observe-sequence@1.0.7
@@ -91,5 +96,6 @@ twbs:bootstrap@3.3.5
 ui@1.0.8
 underscore@1.0.4
 url@1.0.5
+vsivsi:file-collection@1.2.0
 webapp@1.2.2
 webapp-hashing@1.0.5
