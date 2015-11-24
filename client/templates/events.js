@@ -81,6 +81,12 @@
             },
             'change .textRow>input': function (e) {
                 Meteor.call('updFltLength', e.target.value, $(e.target).parent().parent()[0].id)
+            },
+            'click .arrSlot':function(e){
+                Meteor.call('toggleSlot',this._id,'a')
+            },
+            'click .depSlot':function(e){
+                Meteor.call('toggleSlot',this._id,'d')
             }
         });
 
@@ -89,3 +95,4 @@
                 Meteor.call('delFlt', this._id)
             }
         });
+

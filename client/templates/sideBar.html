@@ -1,0 +1,16 @@
+<template name="sidebar">
+    <div id="side-bar">
+        <h4>Чат, нотатки:</h4>
+        <form >
+            <input type="text" name="text"  />
+        </form>
+            {{#each comment}}
+                {{>commentTpl}}
+            {{/each}}
+    </div>
+
+</template>
+
+<template name="commentTpl" >
+    <p>{{text}}</p>
+</template>

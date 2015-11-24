@@ -100,9 +100,11 @@ function react() {
         var userObj = Meteor.user();
         if (userObj.username == 'Windrose'||userObj.username == 'windrose'||userObj.username == 'Guest') {
             Meteor.subscribe('data', function () {
+                Meteor.subscribe('comments');
                 Session.set('data_loaded', true);
                 dbIsReady();
             });
+
         }
     }
 }

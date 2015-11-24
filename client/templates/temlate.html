@@ -7,20 +7,13 @@
 
 
 <template name="sked">
-
+    {{>sidebar}}
     <div id={{_id}} class="countainer">
         <h1 class="title">{{title}}.</h1>
         {{#each week}}
             {{> day}}
         {{/each}}
 
-       <!-- <div class="btn_board no-print">
-            <button data-toggle="modal" data-target="#myModal" class="btn"  type="button" id="open" >Відкрити</button>
-
-            <button class="btn saveAs" >Зберегти як...</button>
-            <button class="btn addBort">Додати ПС</button>
-            <button class="btn hide reset">Очистить все</button>
-        </div> -->
     </div>
 </template>
 
@@ -42,8 +35,8 @@
     <div  id="{{_id}}" style="width: {{width}}px; left: {{left}}px ;" class="rect ">
         <span>{{> editableText  collection="data" field="fltNumber"}}</span>
         <br/>
-        <span style="float:left">{{depTime}}</span>
-        <span style="float:right">{{arrTime}}</span>
+        <span class='depSlot' style="{{#if depSlot}}text-decoration: underline; {{/if}}float:left;">{{depTime}}</span>
+        <span class='arrSlot' style="{{#if arrSlot}}text-decoration: underline; {{/if}}float:right;">{{arrTime}}</span>
         <br/>
          <span class="textRow"> {{> editableText  collection="data" field="direction"}}
          </span>

@@ -1,10 +1,15 @@
 
 Meteor.publish('data', function () {
        if(this.userId) {
-                return Data.find({});
+                return Data.find();
         }
     });
 
+Meteor.publish('comments', function () {
+    if(this.userId) {
+        return Comments.find();
+    }
+});
 
 temporaryFiles.allow({
     insert: function( userId, file ) {
