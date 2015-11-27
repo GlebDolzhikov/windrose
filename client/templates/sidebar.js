@@ -15,13 +15,12 @@ Template.sidebar.events({
         var parentData = Template.parentData(1);
         var skedId = parentData._id;
         event.target.text.value = "";
-        Meteor.call('addComment',text,skedId);
+        Meteor.call('addComment',text,skedId,Meteor.user().username);
     }
 });
 
 Template.commentTpl.events({
     'dblclick p': function(){
-        console.log(this)
-        Meteor.call('removeComment',this._id);
+              Meteor.call('removeComment',this._id);
     }
 });

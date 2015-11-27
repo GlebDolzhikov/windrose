@@ -80,7 +80,14 @@
                 Meteor.call('delFlt', event.target.id)
             },
             'change .textRow>input': function (e) {
-                Meteor.call('updFltLength', e.target.value, $(e.target).parent().parent()[0].id)
+
+                Meteor.call('updFltLength', e.target.value, $(e.target).parent().parent()[0].id,function(e,r){
+                    if(r){
+                        $('.fixed').resizable({
+                            disabled: true
+                        });
+                    }
+                })
             },
             'click .arrSlot':function(e){
                 Meteor.call('toggleSlot',this._id,'a')

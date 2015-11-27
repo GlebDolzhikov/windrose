@@ -65,11 +65,6 @@ Template.borts.helpers({
     }
 });
 
-Template.rect.onRendered(function(){
-  $('.nav h2').text($('.title').text());
-        $('.title').hide();
-    }
-);
 
 Template.layout.helpers({
     skedInfo: function(){
@@ -77,5 +72,11 @@ Template.layout.helpers({
     },
     skedListObj:function(){
         return Data.find({name:'sked'},{sort:{cretedAt:-1}});
+    }
+});
+
+Template.commentTpl.helpers({
+    username: function(){
+        return Meteor.user().username
     }
 });
