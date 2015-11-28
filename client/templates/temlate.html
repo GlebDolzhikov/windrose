@@ -9,12 +9,28 @@
 <template name="sked">
     {{>sidebar}}
     <div id={{_id}} class="countainer">
-        <h1 class="title">{{title}}.</h1>
+        <h1 style='display: none' class="title">{{title}}.</h1>
+    <div class="nalet">
+    <ul>
+    {{#each bort}}
+    <li>
+        {{>nalet}}
+    </li>
+    {{/each}}
+    </ul>
+    </div>
+
         {{#each week}}
             {{> day}}
         {{/each}}
 
     </div>
+</template>
+
+<template name="nalet">
+
+   Наліт за місяц по {{bort}} : {{ttlDuration}} годин
+
 </template>
 
 <template name="day">
@@ -60,7 +76,7 @@
                 {{> rect}}
             {{/each}}
         </div>
-        <div class="duration">{{ttlDuration}} годин</div>
+       <!-- <div class="duration">{{ttlDuration}} годин</div>-->
         <div datafld="{{_id}}" class="delBort no-print">&times;</div>
     </div>
 </template>

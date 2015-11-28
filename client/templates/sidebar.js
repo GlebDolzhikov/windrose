@@ -24,3 +24,8 @@ Template.commentTpl.events({
               Meteor.call('removeComment',this._id);
     }
 });
+
+Template.sidebar.onRendered(function(){
+    var contentWidth = parseInt($('.countainer').width());
+    $('#side-bar').width(window.innerWidth-contentWidth-60);
+});

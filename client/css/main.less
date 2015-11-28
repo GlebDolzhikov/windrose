@@ -4,6 +4,7 @@
 @color1: #ffd180 ;
 @color2: #f6ba52;
 @color3: #c38108;
+@color4:rgba(248,199,66,0.40);
 
 a{
  text-decoration: none !important
@@ -18,7 +19,7 @@ a:hover{
 
 .countainer{
     margin: 15px;
-    width: 1050px;
+    width: 960px;
 }
 
 .title{
@@ -144,8 +145,15 @@ a:hover{
 
 .delBort{
     padding-top: 10px;
+    width: 20px;
+    background-color: #ffff00;
+    float: left;
+    text-align: center;
+    height: 40px;
+    display: block;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
     cursor: pointer;
-
 }
 .hide{
     display: none;
@@ -169,6 +177,19 @@ fieldset input{
     width: 100%;
     height: 700px;
 }
+
+.nalet{
+    .dayName;
+    text-align:left;
+    color: @color3;
+    padding-top: 8px;
+    padding-bottom: 2px;
+    li{
+        font-size: 20px;
+        line-height: 30px;
+    }
+
+}
 #side-bar{
     text-align: center;
     float:right;
@@ -178,7 +199,7 @@ fieldset input{
     border-radius: 20px;
     min-width: 160px;
     margin-right: 10px;
-    background-color: @color1;
+    background-color: @color4;
     max-height:750px;
     min-height: 100px;
     color: @color3;
@@ -191,18 +212,18 @@ fieldset input{
     }
     p{
         .noselect;
+        word-wrap: break-word;
         color: #000;
-        max-width: 170px;
         overflow: hidden;
         text-align: left;
         padding: 5px;
 
     }
     :nth-child(even){
-        background-color: @color2;
+        background-color: @color4;
     }
     form{
-        background-color: @color1 !important;
+        background-color: transparent !important;
     }
 }
 
@@ -235,7 +256,7 @@ fieldset input{
     }
 }
 
-@media (max-width:1230px)  {
+@media (max-width:1150px)  {
     #side-bar{
         display: none;
     }
