@@ -1,14 +1,6 @@
 Template.sked.helpers({
     week:function(){
-        return Data.find({name:'day'});
-    },
-    bort:function(){
-        if (this._id) {
-            return Data.find({
-                name: 'bort',
-                skedId: this._id
-            });
-        }
+        return Data.find({name:'day'},{sort:{day:1}});
     }
 });
 
@@ -73,20 +65,6 @@ Template.borts.helpers({
     }
 });
 
-Template.nalet.helpers({
-    ttlDuration: function(){
-        var ttlTime = 0;
-        Data.find({
-            name:'flight',
-            bort: this.createdAt,
-            skedId: Template.parentData(2)._id
-        }).forEach(function(el){
-            ttlTime += el.width*2;
-        });
-        return Math.floor((ttlTime/60)*4.3);
-    }
-});
-
 
 Template.layout.helpers({
     skedInfo: function(){
@@ -102,4 +80,3 @@ Template.commentTpl.helpers({
         return Meteor.user().username
     }
 });
-
