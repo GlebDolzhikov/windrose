@@ -1,6 +1,6 @@
 Template.sked.helpers({
     week:function(){
-        return Data.find({name:'day'});
+        return Data.find({name:'day'},{sort:{day:1}});
     },
     bort:function(){
         if (this._id) {
