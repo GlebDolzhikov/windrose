@@ -49,9 +49,16 @@
                     animation: "slide-from-top"
                 }, function (input) {
                     var direction = input.split(',')[0].toUpperCase();
-                    var time = input.split(',')[1];
+                    var time = parseInt(input.split(',')[1]);
+                    console.log(direction,time);
                     Meteor.call('addTime', direction, time);
-                    //Meteor.call('updAllFltLength',direction,time);
+                    Meteor.call('updAllFltLength',direction,time,function(e,r) {
+                        if (r) {
+                            $('.fixed').resizable({
+                                disabled: true
+                            });
+                        }
+                    })
                 });
 
             },
