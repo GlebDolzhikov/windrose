@@ -81,9 +81,9 @@ Template.nalet.helpers({
             bort: this.createdAt,
             skedId: Template.parentData(2)._id
         }).forEach(function(el){
-            ttlTime += el.width*2;
+            ttlTime += (el.width/3)*5;
         });
-        return Math.floor((ttlTime/60)*4.3);
+        return Math.round((ttlTime/60)*4.3);
     }
 });
 
