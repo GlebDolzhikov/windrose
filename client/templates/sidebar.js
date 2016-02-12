@@ -25,7 +25,16 @@ Template.commentTpl.events({
     }
 });
 
--Template.sidebar.onRendered(function(){
+Template.commentTpl.helpers({
+    dataL:function(){
+            var date = this.date;
+        console.log(date);
+        var options = { hour12: false };
+            return date.toLocaleString('ru-ru', options);
+        }
+});
+
+Template.sidebar.onRendered(function(){
       var contentWidth = parseInt($('.countainer').width());
        $('#side-bar').width(window.innerWidth-contentWidth-60);
     });

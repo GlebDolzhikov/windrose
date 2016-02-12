@@ -26,14 +26,14 @@ Template.rect.onRendered(function(){
             }
         }).draggable({
             grid: [3, 20],
-            snap: ".day",
+/*            snap: ".day",
             revert: function (event, ui) {
                 $(this).data("uiDraggable").originalPosition = {
                     top: 0,
                     left: 0
                 };
                 return !event;
-            },
+            },*/
             drag: function (event, ui) {
                 var bortId = $(event.target).parent().attr('id'),
                     dayId = $(event.target).parent().parent().parent().attr('id');
