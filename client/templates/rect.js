@@ -3,7 +3,6 @@ var doit;
 
 Template.rect.onRendered(function(){
     function initUi() {
-        console.log('awd');
         $(".rect").mousedown(function (event) {
             if (event.ctrlKey || event.altKey) {
                 $(event.target).draggable({helper: 'clone'});
@@ -12,7 +11,7 @@ Template.rect.onRendered(function(){
             }
         }).resizable({
             grid: 3,
-            handles: 'e,w',
+                handles: 'e,w',
             resize: function (event, ui) {
                 //fire after resize complete
                 var bortId = $(event.target).parent().attr('id'),
@@ -25,15 +24,18 @@ Template.rect.onRendered(function(){
                 )
             }
         }).draggable({
-            grid: [3, 20],
-/*            snap: ".day",
-            revert: function (event, ui) {
-                $(this).data("uiDraggable").originalPosition = {
+            grid: [3,1],
+            snap: ".time_line",
+           revert: function (event, ui) {
+/*                $(this).data("ui-draggable").originalPosition = {
                     top: 0,
                     left: 0
-                };
+                };*/
+                if (Data.findOne($(this)[0].id).arrSlot||Data.findOne($(this)[0].id).depSlot) {
+                   return true;
+                }
                 return !event;
-            },*/
+            },
             drag: function (event, ui) {
                 var bortId = $(event.target).parent().attr('id'),
                     dayId = $(event.target).parent().parent().parent().attr('id');

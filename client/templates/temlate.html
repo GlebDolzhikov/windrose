@@ -48,7 +48,7 @@
 
 
 <template name="rect">
-    <div  id="{{_id}}" style="width: {{width}}px; left: {{left}}px ;" class="rect {{#if fixed}}fixed{{/if}}">
+    <div  id="{{_id}}" style="width: {{width}}px; left: {{left}}px ;" class="rect {{#if fixed}}fixed{{/if}} {{#if depSlot}}fixed{{/if}} {{#if arrSlot}}fixed{{/if}}">
         <span>{{> editableText  collection="data" field="fltNumber"}}</span>
         <br/>
         <span class='depSlot' style="{{#if depSlot}}text-decoration: underline; {{/if}}float:left;">{{depTime}}</span>

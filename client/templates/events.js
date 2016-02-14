@@ -98,9 +98,25 @@
             },
             'click .arrSlot':function(e){
                 Meteor.call('toggleSlot',this._id,'a')
+/*                Meteor.setTimeout(function(){
+                    if( !$(this).parent().hasClass("fixed")){
+                        $(this).parent().resizable( "option", "disabled", false );
+                    }
+                    else{
+                        $(this).parent().resizable( "option", "disabled", true );
+                    }
+                },20)*/
             },
             'click .depSlot':function(e){
                 Meteor.call('toggleSlot',this._id,'d')
+/*                Meteor.setTimeout(function(){
+                    if( !$(this).parent().hasClass("fixed")){
+                        $(this).parent().resizable( "option", "disabled", false );
+                    }
+                    else{
+                        $(this).parent().resizable( "option", "disabled", true );
+                    }
+                },20)*/
             }
         });
 
