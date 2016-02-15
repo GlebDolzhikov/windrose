@@ -103,7 +103,7 @@ Template.nalet.helpers({
 
 Template.layout.helpers({
     skedInfo: function(){
-        return Data.find({name:'time'})
+        return Data.find({name:'time'},{sort:{direction:1}})
     },
     skedListObj:function(){
         return Data.find({name:'sked'},{sort:{cretedAt:-1}});

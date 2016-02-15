@@ -23,7 +23,11 @@ Meteor.methods({
 
     // Example : writing multple rows to file
     var row = 2;
-    Data.find({name:'flight',skedId:id},{sort:{dayNum:1}}).forEach(function(flights) {
+    var validBorts = [];
+    Data.find({name:"bort",skedId:id}).forEach(function(bort){
+        validBorts.push(bort.createdAt);
+    });
+    Data.find({name:'flight',skedId:id,bort:{$in:validBorts}},{sort:{dayNum:1}}).forEach(function(flights) {
         var fltNum = (parseInt(flights.fltNumber.substring(3,10)));
 
         if(fltNum%2){ // if flt num not even
@@ -34,11 +38,13 @@ Meteor.methods({
                 worksheet.writeToCell(row, 1, flights.direction+' '+flights.direction.substring(0,3));
                 worksheet.writeToCell(row, 2, flights.depTime+'-'+flights.arrTime+'/'+backFlt.depTime+'-'+backFlt.arrTime);
                 worksheet.writeToCell(row, 3, 'Day '+flights.dayNum);
+                worksheet.writeToCell(row, 4, 'id '+flights._id);
             }else {
                 worksheet.writeToCell(row, 0, flights.fltNumber);
                 worksheet.writeToCell(row, 1, flights.direction);
                 worksheet.writeToCell(row, 2, flights.depTime + '-' + flights.arrTime);
                 worksheet.writeToCell(row, 3, 'Day '+flights.dayNum);
+                worksheet.writeToCell(row, 4, 'id '+flights._id);
             }
         }
         row++;

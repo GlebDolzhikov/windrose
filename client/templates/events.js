@@ -84,7 +84,19 @@
 
         Template.rect.events({
             'dblclick .rect': function (event) {
-                Meteor.call('delFlt', event.target.id)
+                swal({
+                        title: "Видалити рейс?",
+                        text: "Увага, повернути дiю неможливо",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Так!",
+                        cancelButtonText: "Нi...",
+                        closeOnConfirm: true,
+                        html: false
+                    }, function() {
+                    Meteor.call('delFlt', event.target.id)
+                })
             },
             'change .textRow>input': function (e) {
 
