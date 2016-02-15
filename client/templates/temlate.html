@@ -7,6 +7,7 @@
 
 
 <template name="sked">
+
     {{>sidebar}}
     <div id={{_id}} class="countainer">
         <h1 style='display: none' class="title">{{title}}.</h1>
@@ -52,7 +53,7 @@
         <span>{{> editableText  collection="data" field="fltNumber"}}</span>
         <br/>
         <span class='depSlot' style="{{#if depSlot}}text-decoration: underline; {{/if}}float:left;">{{depTime}}</span>
-        <span class='arrSlot' style="{{#if arrSlot}}text-decoration: underline; {{/if}}float:right;">{{arrTime}}</span>
+        <span class='arrSlot' style="{{#if arrSlot}}text-decoration: underline; {{/if}}float:right;">{{arrTimeFormat}}</span>
         <br/>
          <span class="textRow"> {{> editableText  collection="data" field="direction"}}
          </span>

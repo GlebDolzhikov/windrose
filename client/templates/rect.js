@@ -25,7 +25,7 @@ Template.rect.onRendered(function(){
             }
         }).draggable({
             grid: [3,1],
-            snap: ".time_line",
+            snap: ".day",
            revert: function (event, ui) {
 /*                $(this).data("ui-draggable").originalPosition = {
                     top: 0,

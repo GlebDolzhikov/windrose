@@ -66,11 +66,24 @@ Template.borts.helpers({
     },
     time:function(){
         var arr= [];
-        for(var i = 0;i<24;i++){
+        for(var i = 0;i<31;i++){
+            if(i>24)  {
+                arr.push({hour:i-24})
+            }
+            else{
             arr.push({hour:i})
+            }
         }
         return arr;
     }
+});
+
+Template.rect.helpers({
+   arrTimeFormat : function(){
+       var hours = parseInt(this.arrTime.substring(0,2));
+       if(hours>23) return (hours-24) + ":" + this.arrTime.substring(this.arrTime.indexOf(":")+1,5) + "+1";
+       else return this.arrTime;
+   }
 });
 
 Template.nalet.helpers({

@@ -35,6 +35,9 @@ Template.commentTpl.helpers({
 });
 
 Template.sidebar.onRendered(function(){
-      var contentWidth = parseInt($('.countainer').width());
-       $('#side-bar').width(window.innerWidth-contentWidth-60);
+    Meteor.setTimeout(function(){
+        var contentWidth = parseInt($('.countainer').width());
+        $('#side-bar').width(window.innerWidth-contentWidth-60);
+        $('#side-bar').css("top",($(".countainer").outerHeight()+50))
+    },3000)
     });
