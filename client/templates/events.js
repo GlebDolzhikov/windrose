@@ -50,7 +50,15 @@
                 }, function (input) {
                     var direction = input.split(',')[0].toUpperCase();
                     var time = parseInt(input.split(',')[1]);
-                    console.log(direction,time);
+                    var lastTime = Data.findOne({name:'time',direction:direction});
+                    if (lastTime) {
+                        if(!confirm("Заданий напрям вже внесино у довiдник, з часом " + lastTime.time + "хвилин. Перезаписати новим часом?")) {
+                            return;
+                        }
+                        swal("Час поновлено!",
+                            "перемога",
+                            "success");
+                    }
                     Meteor.call('addTime', direction, time);
                     Meteor.call('updAllFltLength',direction,time,function(e,r) {
                         if (r) {
