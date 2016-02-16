@@ -143,16 +143,28 @@
                         var fltObj = this;
                         setTimeout(function(){
                         var day = Data.findOne(fltObj.day).day;
-                        var range = (fltObj.range ? " з " + fltObj.range[0]+ " по "+fltObj.range[0] + " по " + day + " днях" :"не задоно");
+                            var range = fltObj.range;
+                            if(range) {
+                                if (fltObj.range.length < 3) {
+                                    range = " з " + fltObj.range[0] + " по " + fltObj.range[1] + " по " + day + " днях";
+                                } else{
+                                    range = fltObj.range.join(' | ');
+                                }
+                            } else{
+                                range =  "не задоно";
+                            }
                             setTimeout(function(){
                                 var modal =$(".periodModal");
                                 global = modal.html();
                                 modal.find("input").attr("id","from");
+                                modal.find("p").append("<p><strong>Обрати перiод:</strong></p>");
                                 modal.find("fieldset").append("<input id ='to'/>");
+                                modal.find("fieldset").append("<p><strong>Обрати дати:</strong></p>");
+                                modal.find("fieldset").append("<input id ='multi'/>");
                                 $( "#from" ).datepicker({
                                     defaultDate: "+1w",
                                     changeMonth: true,
-                                    numberOfMonths: 3,
+                                    numberOfMonths: 1,
                                     onClose: function( selectedDate ) {
                                         $( "#to" ).datepicker( "option", "minDate", selectedDate );
                                     }
@@ -160,11 +172,21 @@
                                 $( "#to" ).datepicker({
                                     defaultDate: "+1w",
                                     changeMonth: true,
-                                    numberOfMonths: 3,
+                                    numberOfMonths: 1,
                                     onClose: function( selectedDate ) {
                                         $( "#from" ).datepicker( "option", "maxDate", selectedDate );
                                     }
                                 });
+                                $("#multi").datepick({
+                                    defaultDate: "+1w",
+                                    changeMonth: true,
+                                    numberOfMonths: 1,
+                                    multiSelect: 999,
+                                    onClose: function( selectedDate ) {
+                                        $( "#multi" ).datepicker( "option", "minDate", selectedDate );
+                                    }
+                                });
+
                             },100);
                         swal({
                             title: "Задати перiод:",
@@ -175,8 +197,11 @@
                             closeOnConfirm: true,
                             animation: "slide-from-top"
                         }, function(rangePromt){
-                            if (rangePromt === false) return false;
-                            Meteor.call('setRange', fltObj._id,$( "#from" ).val(),$("#to").val())
+                            if (rangePromt === false&& $( "#multi" ).val() ==="") {
+                                $(".periodModal").html(global);
+                                return false;
+                            }
+                            Meteor.call('setRange', fltObj._id,$( "#from" ).val(),$("#to").val(),$( "#multi" ).val());
                             $(".periodModal").html(global);
                         });},50)
                     }
