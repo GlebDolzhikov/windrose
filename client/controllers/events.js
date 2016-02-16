@@ -14,9 +14,22 @@
                 });
 
             },
-            'click .delBort': function () {
-
+            'click .delBort': function (event) {
                 Meteor.call('delBort', event.target.attributes.datafld.nodeValue)
+            },
+            'click .editBort': function (event) {
+                var text = (Data.findOne(event.target.attributes.datafld.nodeValue).position ? Data.findOne(event.target.attributes.datafld.nodeValue).position :"не задоно");
+                swal({
+                    title: "Задайте позицiю борта:",
+                    text: "Наразi позицiя: " + text,
+                    type: 'input',
+                    showCancelButton: true,
+                    closeOnConfirm: true,
+                    animation: "slide-from-top"
+                }, function(position){
+                    if (position === false) return false;
+                    Meteor.call('editBort', event.target.attributes.datafld.nodeValue,parseInt(position))
+                });
             },
             'click #reset': function () {
                 Meteor.call('reset')

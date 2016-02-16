@@ -18,16 +18,13 @@ Template.skedList.helpers({
     }
 });
 
-
-
-
 Template.day.helpers({
     bort:function(){
         if (Template.parentData(2)) {
             return Data.find({
                 name: 'bort',
                 skedId: Template.parentData(2)._id
-            });
+            },{sort:{position:1}});
         }
     },
     dayToString: function(){
