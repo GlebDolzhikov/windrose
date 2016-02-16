@@ -120,7 +120,6 @@
                 })
             },
             'change .textRow>input': function (e) {
-
                 Meteor.call('updFltLength', e.target.value, $(e.target).parent().parent()[0].id,function(e,r){
                     if(r){
                         $('.fixed').resizable({
@@ -131,26 +130,58 @@
             },
             'click .arrSlot':function(e){
                 Meteor.call('toggleSlot',this._id,'a')
-/*                Meteor.setTimeout(function(){
-                    if( !$(this).parent().hasClass("fixed")){
-                        $(this).parent().resizable( "option", "disabled", false );
-                    }
-                    else{
-                        $(this).parent().resizable( "option", "disabled", true );
-                    }
-                },20)*/
             },
             'click .depSlot':function(e){
                 Meteor.call('toggleSlot',this._id,'d')
-/*                Meteor.setTimeout(function(){
-                    if( !$(this).parent().hasClass("fixed")){
-                        $(this).parent().resizable( "option", "disabled", false );
+            },
+            'contextmenu .rect': function(e) {
+                return false; // pervent context menu
+            },
+            'mousedown .rect': function(event) {
+                //Устанавлтваем период выполнения рейса
+                    if (event.button == 2) {
+                        var fltObj = this;
+                        setTimeout(function(){
+                        var day = Data.findOne(fltObj.day).day;
+                        var range = (fltObj.range ? " з " + fltObj.range[0]+ " по "+fltObj.range[0] + " по " + day + " днях" :"не задоно");
+                            setTimeout(function(){
+                                var modal =$(".periodModal");
+                                global = modal.html();
+                                modal.find("input").attr("id","from");
+                                modal.find("fieldset").append("<input id ='to'/>");
+                                $( "#from" ).datepicker({
+                                    defaultDate: "+1w",
+                                    changeMonth: true,
+                                    numberOfMonths: 3,
+                                    onClose: function( selectedDate ) {
+                                        $( "#to" ).datepicker( "option", "minDate", selectedDate );
+                                    }
+                                });
+                                $( "#to" ).datepicker({
+                                    defaultDate: "+1w",
+                                    changeMonth: true,
+                                    numberOfMonths: 3,
+                                    onClose: function( selectedDate ) {
+                                        $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+                                    }
+                                });
+                            },100);
+                        swal({
+                            title: "Задати перiод:",
+                            text: "Наразi перiод: "+range ,
+                            type: 'input',
+                            customClass:"periodModal",
+                            showCancelButton: true,
+                            closeOnConfirm: true,
+                            animation: "slide-from-top"
+                        }, function(rangePromt){
+                            if (rangePromt === false) return false;
+                            Meteor.call('setRange', fltObj._id,$( "#from" ).val(),$("#to").val())
+                            $(".periodModal").html(global);
+                        });},50)
                     }
-                    else{
-                        $(this).parent().resizable( "option", "disabled", true );
-                    }
-                },20)*/
-            }
+                }
+
         });
 
         Template.route.events({
@@ -158,4 +189,6 @@
                 Meteor.call('delFlt', this._id)
             }
         });
+
+        var global;
 
