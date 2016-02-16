@@ -1,13 +1,4 @@
-<template name="skedList">
-    <ul>
-        <li id="{{_id}}"><a href="{{pathFor 'skeds'}}"> <p class="skedList">{{title}} створено:{{date}} <span  datafld="{{_id}}" class="close cls">&times;</span></p></a>  </li>
-    </ul>
-
-</template>
-
-
 <template name="sked">
-
     {{>sidebar}}
     <div id={{_id}} class="countainer">
         <h1 style='display: none' class="title">{{title}}.</h1>
@@ -20,18 +11,14 @@
     {{/each}}
     </ul>
     </div>
-
         {{#each week}}
             {{> day}}
         {{/each}}
-
     </div>
 </template>
 
 <template name="nalet">
-
    Наліт за місяц по {{bort}} : {{ttlDuration}} годин
-
 </template>
 
 <template name="day">
@@ -48,7 +35,7 @@
 </template>
 
 
-<template name="rect">
+<template name="flights">
     <div  id="{{_id}}" style="width: {{width}}px; left: {{left}}px ;" class="rect {{#if fixed}}fixed{{/if}} {{#if depSlot}}fixed{{/if}} {{#if arrSlot}}fixed{{/if}}">
         <span>{{> editableText  collection="data" field="fltNumber"}}</span>
         <br/>
@@ -63,7 +50,6 @@
 
 <template name="borts">
     <div class="bort">
-
         <div class="left_col">{{> editableText  collection="data" field="bort"}} </div>
 
         <div class="time_line">
@@ -74,7 +60,7 @@
 
         <div class="day" id="{{createdAt}}" onmousedown="return false" onselectstart="return false">
             {{#each flight}}
-                {{> rect}}
+                {{> flights}}
             {{/each}}
         </div>
        <!-- <div class="duration">{{ttlDuration}} годин</div>-->

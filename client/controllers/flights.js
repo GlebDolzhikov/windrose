@@ -1,7 +1,7 @@
 //jQuery UI Resize and draggable
 var doit;
 
-Template.rect.onRendered(function(){
+Template.flights.onRendered(function(){
     function initUi() {
         $(".rect").mousedown(function (event) {
             if (event.ctrlKey || event.altKey) {
@@ -47,6 +47,9 @@ Template.rect.onRendered(function(){
                     event.target.id, bortId, dayId
                 );
                 $(".rect").draggable({helper: 'original'});
+                $('.editable-text').each(function(){
+                    if($(this).draggable) $(this).draggable({ disabled: true })
+                })
             }
         });
 
@@ -95,6 +98,7 @@ Template.rect.onRendered(function(){
 
         $('.nav h2').text($('.title').text());
         $('.title').hide();
+
 
     }
     clearTimeout(doit);

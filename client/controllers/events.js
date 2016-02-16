@@ -90,7 +90,7 @@
         });
 
 
-        Template.rect.events({
+        Template.flights.events({
             'dblclick .rect': function (event) {
                 swal({
                         title: "Видалити рейс?",
