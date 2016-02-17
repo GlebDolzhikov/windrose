@@ -47,9 +47,9 @@ Template.flights.onRendered(function(){
                     event.target.id, bortId, dayId
                 );
                 $(".rect").draggable({helper: 'original'});
-                $('.editable-text').each(function(){
+ /*               $('.editable-text').each(function(){
                     if($(this).draggable) $(this).draggable({ disabled: true })
-                })
+                })*/
             }
         });
 

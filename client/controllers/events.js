@@ -154,7 +154,7 @@
                                 range =  "не задоно";
                             }
                             setTimeout(function(){
-                                var modal =$(".periodModal");
+                                var modal = $(".periodModal");
                                 global = modal.html();
                                 modal.find("input").attr("id","from");
                                 modal.find("p").append("<p><strong>Обрати перiод:</strong></p>");
