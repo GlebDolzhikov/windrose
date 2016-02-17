@@ -47,9 +47,9 @@ Template.flights.onRendered(function(){
                     event.target.id, bortId, dayId
                 );
                 $(".rect").draggable({helper: 'original'});
- /*               $('.editable-text').each(function(){
+                $('.editable-text').each(function(){
                     if($(this).draggable) $(this).draggable({ disabled: true })
-                })*/
+                })
             }
         });
 
@@ -61,6 +61,13 @@ Template.flights.onRendered(function(){
                     dayId = $(this).parent().parent().attr('id'),
                     skedId = $('.countainer')[0].id,
                     elementId = ui.draggable.attr('id');
+         /*           Meteor.call('updateDomEl', {
+                            'width': parseInt($("#"+elementId).css('width')),
+                            'left': parseInt($("#"+elementId).css('left'))
+                        },
+                        elementId, bortId, dayId
+                    );
+*/
                 if (event.ctrlKey) {
                     Meteor.call('copyFlt', pos, dayId, bortId, skedId, elementId, function (error, result) {
                         Meteor.call('updateDomEl', {

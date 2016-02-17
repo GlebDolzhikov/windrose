@@ -158,9 +158,9 @@
                                 global = modal.html();
                                 modal.find("input").attr("id","from");
                                 modal.find("p").append("<p><strong>Обрати перiод:</strong></p>");
-                                modal.find("fieldset").append("<input id ='to'/>");
-                                modal.find("fieldset").append("<p><strong>Обрати дати:</strong></p>");
-                                modal.find("fieldset").append("<input id ='multi'/>");
+                                modal.find("fieldset").append("<input  type='text' id ='to'/>");
+                                modal.find("fieldset").append("<strong>Обрати дати:</strong>");
+                                modal.find("fieldset").append("<input type='text' id ='multi'/>");
                                 $( "#from" ).datepicker({
                                     defaultDate: "+1w",
                                     changeMonth: true,
@@ -185,8 +185,8 @@
                                     onClose: function( selectedDate ) {
                                         $( "#multi" ).datepicker( "option", "minDate", selectedDate );
                                     }
-                                });
 
+                                });
                             },100);
                         swal({
                             title: "Задати перiод:",

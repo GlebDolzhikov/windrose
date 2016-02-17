@@ -66,6 +66,7 @@ mobile-status-bar@1.0.6
 mongo@1.1.2
 mongo-id@1.0.1
 mrt:jquery-ui@1.9.2
+mrt:jquery-ui-bootstrap@1.8.16
 nerdmed:jquery-resize@0.5.3
 netanelgilad:excel@0.2.4
 netanelgilad:mkdirp@0.0.1
