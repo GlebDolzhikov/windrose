@@ -26,6 +26,7 @@ Template.flights.onRendered(function(){
         }).draggable({
             grid: [3,1],
             snap: ".day",
+            snapTolerance: 25,
            revert: function (event, ui) {
 /*                $(this).data("ui-draggable").originalPosition = {
                     top: 0,
@@ -39,7 +40,6 @@ Template.flights.onRendered(function(){
             drag: function (event, ui) {
                 var bortId = $(event.target).parent().attr('id'),
                     dayId = $(event.target).parent().parent().parent().attr('id');
-
                 Meteor.call('updateDomEl', {
                         'width': parseInt($(this).css('width')),
                         'left': parseInt($(this).css('left'))
@@ -61,13 +61,6 @@ Template.flights.onRendered(function(){
                     dayId = $(this).parent().parent().attr('id'),
                     skedId = $('.countainer')[0].id,
                     elementId = ui.draggable.attr('id');
-         /*           Meteor.call('updateDomEl', {
-                            'width': parseInt($("#"+elementId).css('width')),
-                            'left': parseInt($("#"+elementId).css('left'))
-                        },
-                        elementId, bortId, dayId
-                    );
-*/
                 if (event.ctrlKey) {
                     Meteor.call('copyFlt', pos, dayId, bortId, skedId, elementId, function (error, result) {
                         Meteor.call('updateDomEl', {
@@ -90,10 +83,10 @@ Template.flights.onRendered(function(){
                     bortId = event.target.id;
                     dayId = $(event.target).parent().parent().attr('id');
                     Meteor.call('updateDomEl', {
-                            'width': parseInt($(event.target.firstElementChild).css('width')),
-                            'left': parseInt($(event.target.firstElementChild).css('left'))
+                            'width': parseInt(ui.helper.css('width')),
+                            'left': parseInt(ui.helper.css('left'))
                         },
-                        event.target.firstElementChild.id, bortId, dayId
+                        ui.helper.attr("id"), bortId, dayId
                     )
                 }
             }
