@@ -1,5 +1,6 @@
 @height:40px;
 @offset: 50px;
+@width: 1233px;
 @color: #FFFF00;
 @color1: #ffd180 ;
 @color2: #f6ba52;
@@ -19,7 +20,7 @@ a:hover{
 
 .countainer{
     margin: 15px;
-    width: 1233px;
+    width: @width;
 }
 
 .title{
@@ -206,7 +207,6 @@ fieldset input{
 #side-bar{
     text-align: center;
     float:right;
-    max-width:300px;
     overflow: hidden;
     margin-top: 20px;
     border-radius: 20px;
@@ -217,12 +217,13 @@ fieldset input{
     min-height: 100px;
     color: @color3;
     overflow-y: scroll;
+    padding: 5px;
 
     h4 {
         padding: 5px;
     }
     input{
-        max-width: 140px;
+        width: 100%
     }
     p{
         .noselect;
@@ -283,14 +284,17 @@ fieldset input{
 
 @media (max-width:1570px)  {
     #side-bar{
-        top: 1339px;
+        top: 3000px;
         position: absolute;
-        max-width: 1212px !important;
-        width: 1212px !important;
+        max-width: @width !important;
+        width: @width  !important;
         left: 17px;
     }
 }
 
 .ui-draggable-disabled {
+    opacity: 1 !important;
+}
+.ui-resizable-disabled{
     opacity: 1 !important;
 }

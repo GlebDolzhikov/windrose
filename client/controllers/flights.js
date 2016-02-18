@@ -1,5 +1,8 @@
 //jQuery UI Resize and draggable
 var doit;
+function log (m){
+    console.log(m)
+}
 
 Template.flights.onRendered(function(){
     function initUi() {
@@ -13,7 +16,9 @@ Template.flights.onRendered(function(){
             grid: 3,
                 handles: 'e,w',
             resize: function (event, ui) {
-                //fire after resize complete
+                if(parseInt(Data.findOne($(this)[0].id).depTime.substring(0,2))>23){
+                    $(this).trigger('mouseup')
+                }
                 var bortId = $(event.target).parent().attr('id'),
                     dayId = $(event.target).parent().parent().parent().attr('id');
                 Meteor.call('updateDomEl', {
@@ -28,16 +33,29 @@ Template.flights.onRendered(function(){
             snap: ".day",
             snapTolerance: 25,
            revert: function (event, ui) {
-/*                $(this).data("ui-draggable").originalPosition = {
-                    top: 0,
-                    left: 0
-                };*/
                 if (Data.findOne($(this)[0].id).arrSlot||Data.findOne($(this)[0].id).depSlot) {
                    return true;
                 }
+               if(parseInt(Data.findOne($(this)[0].id).depTime.substring(0,2))>23){
+                   return true;
+               }
                 return !event;
             },
             drag: function (event, ui) {
+                var bortId = $(event.target).parent().attr('id'),
+                    dayId = $(event.target).parent().parent().parent().attr('id');
+                Meteor.call('updateDomEl', {
+                        'width': parseInt($(this).css('width')),
+                        'left': parseInt($(this).css('left'))
+                    },
+                    event.target.id, bortId, dayId
+                );
+                $(".rect").draggable({helper: 'original'});
+                $('.editable-text').each(function(){
+                    if($(this).draggable) $(this).draggable({ disabled: true })
+                })
+            },
+            stop : function(event, ui){
                 var bortId = $(event.target).parent().attr('id'),
                     dayId = $(event.target).parent().parent().parent().attr('id');
                 Meteor.call('updateDomEl', {
@@ -79,6 +97,9 @@ Template.flights.onRendered(function(){
                     });
                 }
                 else {
+                    if(ui.helper.hasClass("fixed")) {
+                        return false
+                    }
                     $(this).append(ui.draggable);
                     bortId = event.target.id;
                     dayId = $(event.target).parent().parent().attr('id');

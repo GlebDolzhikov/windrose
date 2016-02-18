@@ -37,6 +37,6 @@ Template.sidebar.onRendered(function(){
     Meteor.setTimeout(function(){
         var contentWidth = parseInt($('.countainer').width());
         $('#side-bar').width(window.innerWidth-contentWidth-60);
-        $('#side-bar').css("top",($(".countainer").outerHeight()+50))
-    },3000)
+        $('#side-bar').css("top",($(".countainer").outerHeight()+100))
+    },5000)
     });
