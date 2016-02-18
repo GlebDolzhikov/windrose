@@ -7,7 +7,7 @@ Template.sked.helpers({
             return Data.find({
                 name: 'bort',
                 skedId: this._id
-            });
+            },{sort:{position:1}});
         }
     }
 });
