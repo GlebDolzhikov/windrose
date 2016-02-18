@@ -13,12 +13,14 @@ Meteor.methods({
     worksheet.writeToCell(1,1, 'Маршрут');
     worksheet.writeToCell(1,2, 'Розклад UTC');
     worksheet.writeToCell(1,3, 'День');
+    worksheet.writeToCell(1,4, 'Борт');
 
     worksheet.setColumnProperties([ // Example : setting the width of columns in the file
         { wch: 15 },
         { wch: 15 },
         { wch: 25 },
-        { wch: 10 }
+        { wch: 10 },
+        { wch: 15 }
     ]);
 
     // Example : writing multple rows to file
@@ -38,13 +40,13 @@ Meteor.methods({
                 worksheet.writeToCell(row, 1, flights.direction+' '+flights.direction.substring(0,3));
                 worksheet.writeToCell(row, 2, flights.depTime+'-'+flights.arrTime+'/'+backFlt.depTime+'-'+backFlt.arrTime);
                 worksheet.writeToCell(row, 3, 'Day '+flights.dayNum);
-                worksheet.writeToCell(row, 4, 'id '+flights._id);
+                worksheet.writeToCell(row, 4, flights.bortName);
             }else {
                 worksheet.writeToCell(row, 0, flights.fltNumber);
                 worksheet.writeToCell(row, 1, flights.direction);
                 worksheet.writeToCell(row, 2, flights.depTime + '-' + flights.arrTime);
                 worksheet.writeToCell(row, 3, 'Day '+flights.dayNum);
-                worksheet.writeToCell(row, 4, 'id '+flights._id);
+                worksheet.writeToCell(row, 4, flights.bortName);
             }
         }
         row++;

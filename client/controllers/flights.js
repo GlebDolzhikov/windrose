@@ -32,7 +32,8 @@ Template.flights.onRendered(function(){
             grid: [3,1],
             snap: ".day",
             snapTolerance: 25,
-           revert: function (event, ui) {
+            snapMode: "inner",
+            revert: function (event, ui) {
                 if (Data.findOne($(this)[0].id).arrSlot||Data.findOne($(this)[0].id).depSlot) {
                    return true;
                 }
