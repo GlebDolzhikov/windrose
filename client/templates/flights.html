@@ -5,7 +5,7 @@
     <div class="nalet">
         <div class="wrapper" id="setSkedRangeWrapper" >
             <div id="jrange" class="dates">
-                <input  id="setSkedRange" type="button" value="Задати перiод" />
+                <input  id="setSkedRange" type="button" value="{{#if range}}{{#each range}}{{this}}  {{/each}} {{else}}Задати перiод {{/if}}" />
                 <div></div>
             </div>
         </div>
