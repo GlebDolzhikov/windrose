@@ -127,3 +127,11 @@ Template.flights.onRendered(function(){
     doit = setTimeout(initUi, 100);
 
 });
+
+Template.flights.helpers({
+    arrTimeFormat : function(){
+        var hours = parseInt(this.arrTime.substring(0,2));
+        if(hours>23) return (hours-24) + ":" + this.arrTime.substring(this.arrTime.indexOf(":")+1,5) + "+1";
+        else return this.arrTime;
+    }
+});

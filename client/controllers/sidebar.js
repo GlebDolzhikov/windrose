@@ -30,7 +30,10 @@ Template.commentTpl.helpers({
             var date = this.date;
         var options = { hour12: false };
             return date.toLocaleString('ru-ru', options);
-        }
+        },
+    username: function(){
+        return Meteor.user().username
+    }
 });
 
 Template.sidebar.onRendered(function(){
