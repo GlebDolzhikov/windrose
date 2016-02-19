@@ -36,6 +36,9 @@
             },
             'click .open': function () {
 
+            },
+            'click #setSkedRange': function(){
+                Meteor.call('setSkedRange',this._id)
             }
         });
 

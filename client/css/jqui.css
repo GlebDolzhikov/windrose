@@ -79,3 +79,9 @@
     right: -5px;
     top: -5px;
 }
+
+
+.date-range-selected > .ui-state-active,
+.date-range-selected > .ui-state-default {
+    background-color: lightsteelblue !important;
+}
