@@ -147,8 +147,8 @@ Template.sked.onRendered(function () {
                 }
             })
             .position({
-                my: 'left top',
-                at: 'left bottom',
+                my: 'right top',
+                at: 'right bottom',
                 of: $('#jrange input')
             })
             .hide();
