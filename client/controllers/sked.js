@@ -34,6 +34,8 @@ Template.sked.onRendered(function () {
                     d1 = $.datepicker.formatDate( 'mm/dd/yy', new Date(Math.min(prv,cur)), {} );
                     d2 = $.datepicker.formatDate( 'mm/dd/yy', new Date(Math.max(prv,cur)), {} );
                     $('#jrange input').val( d1+' - '+d2 );
+                    var id = $(".countainer").attr('id');
+                    Meteor.call('setSkedRange',id,d1,d2)
                 }
             },
             onChangeMonthYear: function ( year, month, inst ) {
@@ -109,8 +111,5 @@ Template.sked.events({
     },
     'click .open': function () {
 
-    },
-    'click #setSkedRange': function(){
-        Meteor.call('setSkedRange',this._id)
     }
 });

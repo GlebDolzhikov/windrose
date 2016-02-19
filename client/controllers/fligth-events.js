@@ -97,7 +97,7 @@ Template.flights.events({
                         $(".periodModal").html(global);
                         return false;
                     }
-                    Meteor.call('setRange', fltObj._id,$( "#from" ).val(),$("#to").val(),$( "#multi" ).val());
+                    Meteor.call('setRange', fltObj._id,$( "#from" ).val(),$("#to").val(),$( "#multi" ).val(),fltObj.dayNum);
                     $(".periodModal").html(global);
                 });},50)
         }
