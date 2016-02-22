@@ -73,5 +73,9 @@ Template.nalet.helpers({
             }
         }
         return {ttl:Math.round(ttlTime/60),month:monthsTimeCounter}
+    },
+    range:function(){
+        console.log( Template.parentData(1).range)
+        return Template.parentData(1).range
     }
 });

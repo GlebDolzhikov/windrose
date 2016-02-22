@@ -111,5 +111,10 @@ Template.sked.events({
     },
     'click .open': function () {
 
+    },
+    "dblclick #setSkedRange": function(e){
+        e.preventDefault()
+        var id = $(".countainer").attr('id');
+        Meteor.call('setSkedRange',id)
     }
 });
