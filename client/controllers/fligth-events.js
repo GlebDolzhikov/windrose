@@ -61,6 +61,7 @@ Template.flights.events({
                         defaultDate: "+1w",
                         changeMonth: true,
                         numberOfMonths: 1,
+                        dateFormat: 'dd-mm-yy',
                         onClose: function( selectedDate ) {
                             $( "#to" ).datepicker( "option", "minDate", selectedDate );
                         }
@@ -69,6 +70,7 @@ Template.flights.events({
                         defaultDate: "+1w",
                         changeMonth: true,
                         numberOfMonths: 1,
+                        dateFormat: 'dd-mm-yy',
                         onClose: function( selectedDate ) {
                             $( "#from" ).datepicker( "option", "maxDate", selectedDate );
                         }
@@ -77,6 +79,7 @@ Template.flights.events({
                         defaultDate: "+1w",
                         changeMonth: true,
                         numberOfMonths: 1,
+                        dateFormat: 'dd-mm-yy',
                         multiSelect: 999,
                         onClose: function( selectedDate ) {
                             $( "#multi" ).datepicker( "option", "minDate", selectedDate );

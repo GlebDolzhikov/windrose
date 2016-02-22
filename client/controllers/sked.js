@@ -31,8 +31,8 @@ Template.sked.onRendered(function () {
                     prv = cur;
                     $('#jrange input').val( dateText );
                 } else {
-                    d1 = $.datepicker.formatDate( 'mm/dd/yy', new Date(Math.min(prv,cur)), {} );
-                    d2 = $.datepicker.formatDate( 'mm/dd/yy', new Date(Math.max(prv,cur)), {} );
+                    d1 = $.datepicker.formatDate( 'dd/mm/yy', new Date(Math.min(prv,cur)), {} );
+                    d2 = $.datepicker.formatDate( 'dd/mm/yy', new Date(Math.max(prv,cur)), {} );
                     $('#jrange input').val( d1+' - '+d2 );
                     var id = $(".countainer").attr('id');
                     Meteor.call('setSkedRange',id,d1,d2)
@@ -59,10 +59,10 @@ Template.sked.onRendered(function () {
         try {
             if ( v.indexOf(' - ') > -1 ) {
                 d = v.split(' - ');
-                prv = $.datepicker.parseDate( 'mm/dd/yy', d[0] ).getTime();
-                cur = $.datepicker.parseDate( 'mm/dd/yy', d[1] ).getTime();
+                prv = $.datepicker.parseDate( 'dd/mm/yy', d[0] ).getTime();
+                cur = $.datepicker.parseDate( 'dd/mm/yy', d[1] ).getTime();
             } else if ( v.length > 0 ) {
-                prv = cur = $.datepicker.parseDate( 'mm/dd/yy', v ).getTime();
+                prv = cur = $.datepicker.parseDate( 'dd/mm/yy', v ).getTime();
             }
         } catch ( e ) {
             cur = prv = -1;
