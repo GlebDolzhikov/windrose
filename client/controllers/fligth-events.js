@@ -10,7 +10,9 @@ Template.flights.events({
             confirmButtonText: "Так!",
             cancelButtonText: "Нi...",
             closeOnConfirm: true,
-            customClass:"warning"
+            customClass:"warning",
+            imageSize:"370x200",
+            imageUrl: "img/plane.jpg"
         }, function(isConfirm) {
                 if (isConfirm) {
                     Meteor.call('delFlt', event.target.id)
@@ -97,7 +99,9 @@ Template.flights.events({
                     customClass:"periodModal",
                     showCancelButton: true,
                     closeOnConfirm: true,
-                    animation: "slide-from-top"
+                    animation: "slide-from-top",
+                    imageSize:"370x167",
+                    imageUrl: "img/plane.jpg"
                 }, function(rangePromt){
                     if (rangePromt === false&& $( "#multi" ).val() ==="") {
                         $(".periodModal").html(global);

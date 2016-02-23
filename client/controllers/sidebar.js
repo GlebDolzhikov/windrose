@@ -31,7 +31,9 @@ Template.commentTpl.events({
             confirmButtonText: "Так!",
             cancelButtonText: "Нi...",
             closeOnConfirm: true,
-            customClass:"warning"
+            customClass:"warning",
+            imageSize:"370x200",
+            imageUrl: "img/plane.jpg"
         }, function(isConfirm) {
             if (isConfirm) {
                 Meteor.call('removeComment',id);
