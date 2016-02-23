@@ -120,8 +120,10 @@ Template.flights.onRendered(function(){
 
         $('.nav h2').text($('.title').text());
         $('.title').hide();
-
-
+        var contentWidth = parseInt($('.countainer').width());
+        $('#side-bar').width(window.innerWidth-contentWidth-60);
+        $('#side-bar').css("top",($(".countainer").outerHeight()+100))
+        log("call")
     }
     clearTimeout(doit);
     doit = setTimeout(initUi, 100);

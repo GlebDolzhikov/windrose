@@ -10,9 +10,12 @@ Template.flights.events({
             confirmButtonText: "Так!",
             cancelButtonText: "Нi...",
             closeOnConfirm: true,
-            html: false
-        }, function() {
-            Meteor.call('delFlt', event.target.id)
+            customClass:"warning"
+        }, function(isConfirm) {
+                if (isConfirm) {
+                    Meteor.call('delFlt', event.target.id)
+                    swal("Зроблено!", "Рейс видалено", "success");
+                }
         })
     },
     'change .textRow>input': function (e) {

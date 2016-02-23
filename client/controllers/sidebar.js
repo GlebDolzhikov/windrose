@@ -21,7 +21,26 @@ Template.sidebar.events({
 
 Template.commentTpl.events({
     'dblclick p': function(){
-              Meteor.call('removeComment',this._id);
+        var id = this._id;
+        swal({
+            title: "Видалити запис?",
+            text: "Увага, повернути дiю неможливо",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Так!",
+            cancelButtonText: "Нi...",
+            closeOnConfirm: true,
+            customClass:"warning"
+        }, function(isConfirm) {
+            if (isConfirm) {
+                Meteor.call('removeComment',id);
+                swal("Зроблено!", "Запис видалено", "success");
+            }else{
+                swal("Дiю скасовано", "Запис не видалено", "error");
+            }
+        })
+
     }
 });
 
@@ -35,11 +54,3 @@ Template.commentTpl.helpers({
         return Meteor.user().username
     }
 });
-
-Template.sidebar.onRendered(function(){
-    Meteor.setTimeout(function(){
-        var contentWidth = parseInt($('.countainer').width());
-        $('#side-bar').width(window.innerWidth-contentWidth-60);
-        $('#side-bar').css("top",($(".countainer").outerHeight()+100))
-    },5000)
-    });
