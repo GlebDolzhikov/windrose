@@ -98,7 +98,8 @@ Template.flights.onRendered(function(){
                     });
                 }
                 else {
-                    if(ui.helper.hasClass("fixed")) {
+
+                    if(Data.findOne(elementId).arrSlot||Data.findOne(elementId).depSlot) {
                         return false
                     }
                     $(this).append(ui.draggable);
