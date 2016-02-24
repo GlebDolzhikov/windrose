@@ -124,7 +124,6 @@ Template.flights.onRendered(function(){
         var contentWidth = parseInt($('.countainer').width());
         $('#side-bar').width(window.innerWidth-contentWidth-60);
         $('#side-bar').css("top",($(".countainer").outerHeight()+100))
-        log("call")
     }
     clearTimeout(doit);
     doit = setTimeout(initUi, 100);

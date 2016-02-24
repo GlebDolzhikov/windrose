@@ -21,7 +21,7 @@ Template.nalet.helpers({
         }
         Data.find({
             name:'flight',
-            bort: this.createdAt,
+            bort: this._id,
             skedId: Template.parentData(2)._id
         }).forEach(function(el){
             if(skedObj.range){

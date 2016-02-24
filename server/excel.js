@@ -29,7 +29,7 @@ Meteor.methods({
     var row = 2;
     var validBorts = [];
     Data.find({name:"bort",skedId:id}).forEach(function(bort){
-        validBorts.push(bort.createdAt);
+        validBorts.push(bort._id);
     });
     Data.find({name:'flight',skedId:id,bort:{$in:validBorts}},{sort:{dayNum:1}}).forEach(function(flights) {
         var fltNum = (parseInt(flights.fltNumber.substring(3,10)));
@@ -47,7 +47,7 @@ Meteor.methods({
                 worksheet.writeToCell(row, 2, flights.depTime + '-' + flights.arrTime);
             }
             worksheet.writeToCell(row, 3, 'Day '+flights.dayNum);
-            worksheet.writeToCell(row, 4, flights.bortName);
+            worksheet.writeToCell(row, 4, Data.findOne(flights.bort).bort);
             if(flights.range) {
                 if (flights.range.length > 1) {
                     flights.range.forEach(function(el,n){

@@ -1,6 +1,7 @@
 var global;
 Template.flights.events({
     'dblclick .rect': function (event) {
+        event.stopPropagation();
         swal({
             title: "Видалити рейс?",
             text: "Увага, повернути дiю неможливо",

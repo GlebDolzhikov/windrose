@@ -3,7 +3,7 @@ Template.borts.helpers({
         var ttlTime = 0;
         Data.find({
             name:'flight',
-            bort: this.createdAt,
+            bort: this._id,
             skedId: Template.parentData(3)._id
         }).forEach(function(el){
             ttlTime += el.width*2;
@@ -13,7 +13,7 @@ Template.borts.helpers({
     flight:function(){
         return Data.find({
             name:'flight',
-            bort: this.createdAt,
+            bort: this._id,
             day:Template.parentData()._id,
             skedId: Template.parentData(3)._id
         });
