@@ -26,7 +26,7 @@
 
 <template name="nalet">
    <span>Загальний наліт за перiод по {{bort}}: {{ttlDuration.ttl}} годин;</span><br/>
-    {{#if range}}<span>Наліт по мicяцях:{{#each ttlDuration.month}}{{#if this}} 0{{@index}} - {{this}} годин, {{/if}} {{/each}}</span><br/>{{/if}}
+    {{#if range}}<span class="small-text">Наліт по мicяцях:{{#each ttlDuration.month}}{{#if this}} {{months @index}} - {{this}} годин, {{/if}} {{/each}}</span><br/>{{/if}}
 </template>
 
 <template name="day">
