@@ -9,18 +9,20 @@ Meteor.methods({
     var worksheet = excel.createWorksheet(); // Create a worksheet to be added to the workbook
     worksheet.writeToCell(0,0,0,0, skedName); // Example : writing to a cell
     worksheet.mergeCells(0,0,0,0,0,1); // Example : merging files
-    worksheet.writeToCell(1,0, 'Номер рейсу');
-    worksheet.writeToCell(1,1, 'Маршрут');
-    worksheet.writeToCell(1,2, 'Розклад UTC');
-    worksheet.writeToCell(1,3, 'День');
-    worksheet.writeToCell(1,4, 'Борт');
+    worksheet.writeToCell(1,0, 'Номер рейсу:');
+    worksheet.writeToCell(1,1, 'Маршрут:');
+    worksheet.writeToCell(1,2, 'Розклад UTC:');
+    worksheet.writeToCell(1,3, 'День:');
+    worksheet.writeToCell(1,4, 'Борт:');
+    worksheet.writeToCell(1,5, 'Перiод:');
 
     worksheet.setColumnProperties([ // Example : setting the width of columns in the file
         { wch: 15 },
         { wch: 15 },
         { wch: 25 },
         { wch: 10 },
-        { wch: 15 }
+        { wch: 15 },
+        { wch: 70 }
     ]);
 
     // Example : writing multple rows to file
@@ -39,14 +41,24 @@ Meteor.methods({
                 worksheet.writeToCell(row, 0, flights.fltNumber+'/'+(parseInt(flights.fltNumber.substring(5,10))+1));
                 worksheet.writeToCell(row, 1, flights.direction+' '+flights.direction.substring(0,3));
                 worksheet.writeToCell(row, 2, flights.depTime+'-'+flights.arrTime+'/'+backFlt.depTime+'-'+backFlt.arrTime);
-                worksheet.writeToCell(row, 3, 'Day '+flights.dayNum);
-                worksheet.writeToCell(row, 4, flights.bortName);
             }else {
                 worksheet.writeToCell(row, 0, flights.fltNumber);
                 worksheet.writeToCell(row, 1, flights.direction);
                 worksheet.writeToCell(row, 2, flights.depTime + '-' + flights.arrTime);
-                worksheet.writeToCell(row, 3, 'Day '+flights.dayNum);
-                worksheet.writeToCell(row, 4, flights.bortName);
+            }
+            worksheet.writeToCell(row, 3, 'Day '+flights.dayNum);
+            worksheet.writeToCell(row, 4, flights.bortName);
+            if(flights.range) {
+                if (flights.range.length > 1) {
+                    flights.range.forEach(function(el,n){
+                        flights.range[n] = flights.range[n].substring(0,5).replace(/-/g,"/");
+                    });
+                    if (!flights.singleDays) {
+                        worksheet.writeToCell(row, 5, flights.range[0] + "-" + flights.range[1]);
+                    } else {
+                        worksheet.writeToCell(row, 5, flights.range.join('-'));
+                    }
+                }
             }
         }
         row++;
