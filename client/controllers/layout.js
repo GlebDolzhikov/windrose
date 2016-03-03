@@ -3,9 +3,17 @@ Template.layout.events({
         Meteor.call('addBort', $('.countainer')[0].id)
     },
     'click .saveAs': function () {
-        var input = prompt('Введите название, например: зима 2016');
+        var input = prompt('Задайте назву, нового розкладу:');
 
         Meteor.call('saveAs', $('.countainer')[0].id, input, function (error, result) {
+            Router.go('/sked/' + result);
+        });
+
+    },
+    'click .newSked': function () {
+        var input = prompt('Задайте назву, нового розкладу:');
+
+        Meteor.call('newSked',input, function (error, result) {
             Router.go('/sked/' + result);
         });
 

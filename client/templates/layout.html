@@ -10,10 +10,22 @@
             </div>
                 <div>
                     {{#if currentUser}}
+
+
+
+
                 <ul class="nav navbar-nav">
-                    <li><a class="saveAs">Створити</a></li>
-                    <li><a href="#" data-toggle="modal" data-target="#myModal"  id="open" >Відкрити</a></li>
-                    <li><a class = 'download' href="#">Зберегти у ексель</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Розклад <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="newSked">Створити новий</a></li>
+                            <li><a class="saveAs">Зберегти як..</a></li>
+                            <li><a class = 'download' href="#">Iмпорт у ексель</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#" data-toggle="modal" data-target="#myModal"  id="open" >Відкрити</a></li>
+                        </ul>
+                    </li>
+
                     <li><a class="print" onclick="window.print()">Друкувати</a></li>
                     <li><a class="addBort">Додати ПС</a></li>
                     <li><a data-toggle="modal" data-target="#myModal2" id="dovid">Довідник</a></li>
