@@ -16,11 +16,15 @@ Template.flights.onRendered(function(){
             grid: 3,
                 handles: 'e,w',
             resize: function (event, ui) {
+
                 if(parseInt(Data.findOne($(this)[0].id).depTime.substring(0,2))>23){
                     $(this).trigger('mouseup')
                 }
                 var bortId = $(event.target).parent().attr('id'),
                     dayId = $(event.target).parent().parent().parent().attr('id');
+                if(Session.get("blockMode")){
+                    $(this).css(ui.originalSize);
+                }
                 Meteor.call('updateDomEl', {
                         'width': parseInt($(this).css('width')),
                         'left': parseInt($(this).css('left'))
@@ -34,7 +38,7 @@ Template.flights.onRendered(function(){
             snapTolerance: 25,
             snapMode: "inner",
             revert: function (event, ui) {
-                if (Data.findOne($(this)[0].id).arrSlot||Data.findOne($(this)[0].id).depSlot) {
+                if (Data.findOne($(this)[0].id).arrSlot||Data.findOne($(this)[0].id).depSlot||Session.get("blockMode")) {
                    return true;
                 }
                if(parseInt(Data.findOne($(this)[0].id).depTime.substring(0,2))>23){
@@ -99,7 +103,7 @@ Template.flights.onRendered(function(){
                 }
                 else {
 
-                    if(Data.findOne(elementId).arrSlot||Data.findOne(elementId).depSlot) {
+                    if(Data.findOne(elementId).arrSlot||Data.findOne(elementId).depSlot||Session.get("blockMode")) {
                         return false
                     }
                     $(this).append(ui.draggable);

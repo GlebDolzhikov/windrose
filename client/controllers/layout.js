@@ -57,6 +57,10 @@ Template.layout.events({
             link.href = fileUrl;
             link.click();
         });
+    },
+    'click  #myonoffswitch' :function(){
+        var checked = $(".onoffswitch-checkbox")[0].checked;
+        Session.set("blockMode",checked);
     }
 });
 
@@ -66,5 +70,8 @@ Template.layout.helpers({
     },
     skedListObj:function(){
         return Data.find({name:'sked'},{sort:{cretedAt:-1}});
+    },
+    blockMode: function(){
+        return Session.get("blockMode");
     }
 });
