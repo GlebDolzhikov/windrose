@@ -19,7 +19,6 @@ Template.layout.events({
 
     },
     'click .addTimeBlock': function () {
-
         swal({
             title: "Задайте новий тайм блок",
             text: 'Формат KBP AYT, 200 (час у хвилинах)',
@@ -61,6 +60,21 @@ Template.layout.events({
     'click  #myonoffswitch' :function(){
         var checked = $(".onoffswitch-checkbox")[0].checked;
         Session.set("blockMode",checked);
+    },
+    'click  .addBlock' :function(){
+        var flightId = Data.findOne(Session.get("chosenFlight"))._id;
+        console.log(flightId);
+        swal({
+            title: "Додати компанiю",
+            text: "Наприклад 'Аероплан'",
+            type: 'input',
+            showCancelButton: true,
+            closeOnConfirm: true,
+            animation: "slide-from-top"
+        }, function (input) {
+            Meteor.call('addBlock', input, flightId);
+        });
+
     }
 });
 
@@ -73,5 +87,53 @@ Template.layout.helpers({
     },
     blockMode: function(){
         return Session.get("blockMode");
+    },
+    blocks: function(){
+        return Data.find({name:"block",flight:Session.get("chosenFlight")})
+    },
+    flightNum: function(){
+        if(Session.get("chosenFlight")) {
+            var fltObj = Data.findOne(Session.get("chosenFlight"));
+            if(fltObj){
+                return fltObj.fltNumber;
+            }
+        }
+    },
+    bortName:function(){
+        var fltObj = Data.findOne(Session.get("chosenFlight"));
+        if(fltObj){
+            var bortId = fltObj.bort;
+            var bortObj = Data.findOne(bortId);
+            if(bortObj){
+                return bortObj.bort
+            }
+        }
+    },
+    bortCapacity:function(){
+        var fltObj = Data.findOne(Session.get("chosenFlight"));
+        if(fltObj){
+            var bortId = fltObj.bort;
+            var bortObj = Data.findOne(bortId);
+            if(bortObj){
+                return bortObj.capacity
+            }
+        }
+    },
+    bortOpen:function(){
+        var fltObj = Data.findOne(Session.get("chosenFlight"));
+        if(fltObj){
+            var bortId = fltObj.bort;
+            var bortObj = Data.findOne(bortId);
+            if(bortObj){
+                var total = 0;
+                Data.find({"name":"block",flight:Session.get("chosenFlight")}).forEach(function(blockObj){
+                    if(!isNaN(blockObj.amount)){
+                        total +=  parseInt(blockObj.amount)
+                    }
+
+                });
+                return bortObj.capacity - total;
+            }
+        }
     }
 });

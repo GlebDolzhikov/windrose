@@ -1,5 +1,11 @@
 var global;
 Template.flights.events({
+    'click .rect': function(){
+        if(Session.get("blockMode")){
+            Session.set("chosenFlight",this._id)
+            $("#blockModal").modal("show")
+        }
+    },
     'dblclick .rect': function (event) {
         event.stopPropagation();
         swal({

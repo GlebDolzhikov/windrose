@@ -93,18 +93,34 @@ Template.sked.events({
         Meteor.call('delBort', event.target.attributes.datafld.nodeValue)
     },
     'click .editBort': function (event) {
-        var text = (Data.findOne(event.target.attributes.datafld.nodeValue).position ? Data.findOne(event.target.attributes.datafld.nodeValue).position :"не задоно");
-        swal({
-            title: "Задайте позицiю борта:",
-            text: "Наразi позицiя: " + text,
-            type: 'input',
-            showCancelButton: true,
-            closeOnConfirm: true,
-            animation: "slide-from-top"
-        }, function(position){
-            if (position === false) return false;
-            Meteor.call('editBort', event.target.attributes.datafld.nodeValue,parseInt(position))
-        });
+        var bortId = Data.findOne(event.target.attributes.datafld.nodeValue);
+        if(Session.get("blockMode")){
+            var text = (bortId.capacity ? bortId.capacity : "не задоно");
+            swal({
+                title: "Задайте загальну кiлькiсть мicць для "+bortId.bort+":",
+                text: "Наразi: " + text,
+                type: 'input',
+                showCancelButton: true,
+                closeOnConfirm: true,
+                animation: "slide-from-top"
+            }, function (capacity) {
+                if (capacity === false) return false;
+                Meteor.call('editBortCapacity', event.target.attributes.datafld.nodeValue, parseInt(capacity))
+            });
+        } else {
+            var text = (bortId.position ? bortId.position : "не задоно");
+            swal({
+                title: "Задайте позицiю борта:",
+                text: "Наразi позицiя: " + text,
+                type: 'input',
+                showCancelButton: true,
+                closeOnConfirm: true,
+                animation: "slide-from-top"
+            }, function (position) {
+                if (position === false) return false;
+                Meteor.call('editBort', event.target.attributes.datafld.nodeValue, parseInt(position))
+            });
+        }
     },
     'click #reset': function () {
         Meteor.call('reset')
