@@ -8,10 +8,12 @@
 @color4:rgba(248,199,66,0.40);
 
 a{
- text-decoration: none !important
+ text-decoration: none !important;
+ color:@color3;
 }
 a:hover{
-    text-decoration: none !important
+    text-decoration: none !important;
+    color:@color2;
 }
 .skedList{
     text-align: left;
@@ -115,7 +117,7 @@ a:hover{
     width:  @offset;
     overflow: hidden;
     float: left;
-    background-color: @color;
+    background-color: @color1;
     height: @height;
     display: block;
     border-top-left-radius: 10px;
@@ -148,7 +150,7 @@ a:hover{
 .delBort{
     padding-top: 10px;
     width: 20px;
-    background-color: #ffff00;
+    background-color: @color1;
     float: left;
     text-align: center;
     height: 40px;
@@ -161,7 +163,7 @@ a:hover{
 .editBort{
     padding-top: 10px;
     width: 16px;
-    background-color: #ffff00;
+    background-color: @color1;
     float: left;
     text-align: center;
     height: 40px;
@@ -410,14 +412,15 @@ fieldset input{
     right: 0px;
 }
 #blockSwitcher   {
+    color: gray;
+    line-height: 3.6;
+    padding: 0 10px;
+    border-left: solid 1px #E7E7E7;
     .onoffswitch{
         float: right;
         margin-left: 5px;
+        margin-top: 11px;
     }
-    color: gray;
-    line-height: 2em;
-    margin-top: 11px;
-
 }
 #blockModal{
     font-size: 18px;
