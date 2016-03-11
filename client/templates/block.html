@@ -1,6 +1,9 @@
 <template name="block">
-    <li>
-        <p class="skedList">Замовник:{{> editableText  collection="data" field="company"}}  кiлькiсть крiсел: {{> editableText  collection="data" field="amount"}}
-            <span  datafld="{{_id}}" class="close cls">&times;</span></p>
-    </li>
+    <tr>
+        <td> {{> editableText  collection="data" field="company"}}</td>
+        <td> {{> editableText  collection="data" field="amount"}}</td>
+        <td> <span  datafld="{{_id}}" class="close cls">&times;</span></td>
+    </tr>
 </template>
+
+
