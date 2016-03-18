@@ -1,9 +1,23 @@
 var global;
 Template.flights.events({
-    'click .rect': function(){
+    'click .rect': function(e){
         if(Session.get("blockMode")){
-            Session.set("chosenFlight",this._id)
+            Session.set("chosenFlight",this._id);
             $("#blockModal").modal("show")
+        }
+        if (e.shiftKey) {
+            Meteor.call('fltFixToggle', e.target.id,function(error,result){
+                var me = $("#"+e.target.id);
+                if(result){
+                    me.resizable({
+                        disabled: false
+                    }).addClass("orange")
+                } else{
+                    me.resizable({
+                        disabled: true
+                    }).removeClass("orange")
+                }
+            });
         }
     },
     'dblclick .rect': function (event) {
