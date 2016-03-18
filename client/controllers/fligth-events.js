@@ -12,13 +12,11 @@ Template.flights.events({
                 if(result){
                     me.resizable({
                         disabled: false
-                    }).addClass("orange")
-                    console.log("if")
+                    }).addClass("orange");
                 } else{
                     me.resizable({
                         disabled: true
                     }).removeClass("orange");
-                    console.log("else")
                     Meteor.call("updFltLength",thisObj.direction,thisObj._id)
                 }
             });

@@ -63,18 +63,8 @@ Template.layout.events({
     },
     'click  .addBlock' :function(){
         var flightId = Data.findOne(Session.get("chosenFlight"))._id;
-        console.log(flightId);
-        swal({
-            title: "Додати компанiю",
-            text: "Наприклад 'Аероплан'",
-            type: 'input',
-            showCancelButton: true,
-            closeOnConfirm: true,
-            animation: "slide-from-top"
-        }, function (input) {
-            Meteor.call('addBlock', input, flightId);
-        });
 
+        Meteor.call('addBlock', null, flightId);
     }
 });
 

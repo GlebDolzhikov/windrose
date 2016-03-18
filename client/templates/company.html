@@ -1,0 +1,25 @@
+
+<template name="company">
+    <div id="company" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Замовники:</h4>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        {{#each companysName}}
+                            {{> companyNameRow}}
+                        {{/each}}
+                    </ul>
+                    <button class="btn addCompany">Додати</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="companyNameRow">
+    <p>{{company}} <span  datafld="{{_id}}" class="close cls">&times;</span></p>
+</template>

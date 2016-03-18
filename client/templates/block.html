@@ -1,9 +1,20 @@
 <template name="block">
     <tr>
-        <td> {{> editableText  collection="data" field="company"}}</td>
+        <td>
+            <div class="form-group">
+                <select class="form-control" id="companySelect">
+                    <option selected="selected">{{company}}</option>
+                    {{#each companys}}
+                        {{> companyRow}}
+                    {{/each}}
+                </select>
+            </div>
+        </td>
         <td> {{> editableText  collection="data" field="amount"}}</td>
         <td> <span  datafld="{{_id}}" class="close cls">&times;</span></td>
     </tr>
 </template>
 
-
+<template name="companyRow">
+    <option>{{company}}</option>
+</template>
