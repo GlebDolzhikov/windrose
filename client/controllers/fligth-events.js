@@ -5,6 +5,7 @@ Template.flights.events({
             Session.set("chosenFlight",this._id);
             $("#blockModal").modal("show")
         }
+        var thisObj = this;
         if (e.shiftKey) {
             Meteor.call('fltFixToggle', e.target.id,function(error,result){
                 var me = $("#"+e.target.id);
@@ -12,10 +13,13 @@ Template.flights.events({
                     me.resizable({
                         disabled: false
                     }).addClass("orange")
+                    console.log("if")
                 } else{
                     me.resizable({
                         disabled: true
-                    }).removeClass("orange")
+                    }).removeClass("orange");
+                    console.log("else")
+                    Meteor.call("updFltLength",thisObj.direction,thisObj._id)
                 }
             });
         }
