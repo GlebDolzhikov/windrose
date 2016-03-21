@@ -4,7 +4,8 @@ Template.company.helpers({
     }
 });
 Template.company.events({
-    "click .addCompany" : function(){
+    "click .addCompany" : function(e){
+        var skedId = this._id;
         swal({
          title: "Додати компанiю",
          text: "Наприклад 'Аероплан'",
@@ -13,7 +14,7 @@ Template.company.events({
          closeOnConfirm: true,
          animation: "slide-from-top"
          }, function (company) {
-            Meteor.call('addCompany', company);
+            Meteor.call('addCompany', company,skedId);
          });
     },
     'click .cls': function () {

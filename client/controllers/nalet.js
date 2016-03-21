@@ -61,7 +61,6 @@ Template.nalet.helpers({
                             }
                         }
                         ttlTime += (el.width / 3) * 5 * counter;
-                    }else{
                     }
                 }
             }else {
