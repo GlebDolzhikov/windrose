@@ -1,10 +1,10 @@
 //jQuery UI Resize and draggable
 var doit;
-function log (m){
+function log(m) {
     console.log(m)
 }
 
-Template.flights.onRendered(function(){
+Template.flights.onRendered(function () {
     function initUi() {
         $(".rect").mousedown(function (event) {
             if (event.ctrlKey || event.altKey) {
@@ -14,15 +14,15 @@ Template.flights.onRendered(function(){
             }
         }).resizable({
             grid: 3,
-                handles: 'e,w',
+            handles: 'e,w',
             resize: function (event, ui) {
 
-                if(parseInt(Data.findOne($(this)[0].id).depTime.substring(0,2))>23){
+                if (parseInt(Data.findOne($(this)[0].id).depTime.substring(0, 2)) > 23) {
                     $(this).trigger('mouseup')
                 }
                 var bortId = $(event.target).parent().attr('id'),
                     dayId = $(event.target).parent().parent().parent().attr('id');
-                if(Session.get("blockMode")){
+                if (Session.get("blockMode")) {
                     $(this).css(ui.originalSize);
                 }
                 Meteor.call('updateDomEl', {
@@ -33,17 +33,17 @@ Template.flights.onRendered(function(){
                 )
             }
         }).draggable({
-            grid: [3,1],
+            grid: [3, 1],
             snap: ".day",
             snapTolerance: 25,
             snapMode: "inner",
             revert: function (event, ui) {
-                if (Data.findOne($(this)[0].id).arrSlot||Data.findOne($(this)[0].id).depSlot||Session.get("blockMode")) {
-                   return true;
+                if (Data.findOne($(this)[0].id).arrSlot || Data.findOne($(this)[0].id).depSlot || Session.get("blockMode")) {
+                    return true;
                 }
-               if(parseInt(Data.findOne($(this)[0].id).depTime.substring(0,2))>23){
-                   return true;
-               }
+                if (parseInt(Data.findOne($(this)[0].id).depTime.substring(0, 2)) > 23) {
+                    return true;
+                }
                 return !event;
             },
             drag: function (event, ui) {
@@ -56,11 +56,11 @@ Template.flights.onRendered(function(){
                     event.target.id, bortId, dayId
                 );
                 $(".rect").draggable({helper: 'original'});
-                $('.editable-text').each(function(){
-                    if($(this).draggable) $(this).draggable({ disabled: true })
+                $('.editable-text').each(function () {
+                    if ($(this).draggable) $(this).draggable({disabled: true})
                 })
             },
-            stop : function(event, ui){
+            stop: function (event, ui) {
                 var bortId = $(event.target).parent().attr('id'),
                     dayId = $(event.target).parent().parent().parent().attr('id');
                 Meteor.call('updateDomEl', {
@@ -70,8 +70,8 @@ Template.flights.onRendered(function(){
                     event.target.id, bortId, dayId
                 );
                 $(".rect").draggable({helper: 'original'});
-                $('.editable-text').each(function(){
-                    if($(this).draggable) $(this).draggable({ disabled: true })
+                $('.editable-text').each(function () {
+                    if ($(this).draggable) $(this).draggable({disabled: true})
                 })
             }
         });
@@ -103,7 +103,7 @@ Template.flights.onRendered(function(){
                 }
                 else {
 
-                    if(Data.findOne(elementId).arrSlot||Data.findOne(elementId).depSlot||Session.get("blockMode")) {
+                    if (Data.findOne(elementId).arrSlot || Data.findOne(elementId).depSlot || Session.get("blockMode")) {
                         return false
                     }
                     $(this).append(ui.draggable);
@@ -126,18 +126,25 @@ Template.flights.onRendered(function(){
         $('.nav h2').text($('.title').text());
         $('.title').hide();
         var contentWidth = parseInt($('.countainer').width());
-        $('#side-bar').width(window.innerWidth-contentWidth-60);
-        $('#side-bar').css("top",($(".countainer").outerHeight()+100))
+        $('#side-bar').width(window.innerWidth - contentWidth - 60);
+        $('#side-bar').css("top", ($(".countainer").outerHeight() + 100))
     }
+
     clearTimeout(doit);
     doit = setTimeout(initUi, 100);
 
 });
 
 Template.flights.helpers({
-    arrTimeFormat : function(){
-        var hours = parseInt(this.arrTime.substring(0,2));
-        if(hours>23) return (hours-24) + ":" + this.arrTime.substring(this.arrTime.indexOf(":")+1,5) + "+1";
+    arrTimeFormat: function () {
+        var hours = parseInt(this.arrTime.substring(0, 2));
+        if (hours > 23) return (hours - 24) + ":" + this.arrTime.substring(this.arrTime.indexOf(":") + 1, 5) + "+1";
         else return this.arrTime;
+    },
+    blockMode: function () {
+        return Session.get("blockMode")
+    },
+    blocks: function(){
+        return Data.find({name:"block",flight:this._id})
     }
 });

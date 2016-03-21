@@ -15,6 +15,13 @@
     </tr>
 </template>
 
+
+<template name="blockShortView">
+    <span>
+    {{company}} {{> editableText  collection="data" field="amount"}}
+    </span>
+</template>
+
 <template name="companyRow">
     <option>{{company}}</option>
 </template>

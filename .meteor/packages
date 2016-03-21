@@ -31,6 +31,7 @@ netanelgilad:mkdirp
 vsivsi:file-collection
 netanelgilad:node-uuid
 kevohagan:sweetalert
+lookback:tooltips
 
 mrt:jquery-ui-bootstrap
 momentjs:moment
