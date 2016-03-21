@@ -20,8 +20,10 @@ Meteor.methods({
         }
         var colNum = 18;
         Data.find({name:"company",sked:id},{sort:{company:1}}).forEach(function(company){
-            worksheet.writeToCell(1,colNum, company.company);
-            colNum++;
+            if (company.company) {
+                worksheet.writeToCell(1, colNum, company.company);
+                colNum++;
+            }
         });
         worksheet.writeToCell(1,colNum, "Усього:");
 
@@ -49,10 +51,20 @@ Meteor.methods({
         // Example : writing multple rows to file
         var row = 2;
         var validBorts = [];
+        var prevDay = 1;
+
         Data.find({name:"bort",skedId:id}).forEach(function(bort){
             validBorts.push(bort._id);
         });
+
         Data.find({name:'flight',skedId:id,bort:{$in:validBorts}},{sort:{dayNum:1,direction:1}}).forEach(function(flights) {
+
+            //дополнительная строка после вывода дня
+            if(prevDay < parseInt(flights.dayNum)){
+                row++;
+            }
+            prevDay = flights.dayNum;
+
             var fltNum = (parseInt(flights.fltNumber.substring(3,10)));
 
             if(fltNum%2){ // if flt num not even
@@ -94,14 +106,18 @@ Meteor.methods({
                 Data.find({name:"company",sked:id},{sort:{company:1}}).forEach(function(company){
                     var blockObj = Data.findOne({name:"block",flight:flights._id,company:company.company});
                     if(blockObj){
-                        worksheet.writeToCell(row, colNum,blockObj.amount);
+                        if (blockObj.amount) {
+                            worksheet.writeToCell(row, colNum, blockObj.amount);
+                        }
                     }
                     colNum++;
                 });
                 //вывод общей вместимости
                 var bortObj = Data.findOne(flights.bort);
                 if(bortObj){
-                    worksheet.writeToCell(row, colNum,bortObj.capacity);
+                    if(bortObj.capacity){
+                        worksheet.writeToCell(row, colNum,bortObj.capacity);
+                    }
                 }
 
                 row++;
@@ -138,7 +154,6 @@ Meteor.methods({
         return futureResponse.wait();
 
         function coutFlightByMoth(flights) {
-            var fltRange = moment.range(dateFormat(flights.range[0]), dateFormat(flights.range[1]));
 
             var counter = 0;
             var monthsCounter = [];
@@ -152,6 +167,8 @@ Meteor.methods({
                     counter++
                 }
             } else {
+                var fltRange = moment.range(dateFormat(flights.range[0]), dateFormat(flights.range[1]));
+
                 fltRange.by('days', function (moment) {
                     if (moment.weekday() == flights.dayNum) {
                         monthsCounter[moment.month() + 1]++; //счетчик месяцев
@@ -164,7 +181,6 @@ Meteor.methods({
             function dateFormat(date){
                 var from = date.split("-");
                 var f = new Date(from[2], from[1] - 1, from[0]);
-                console.log(f)
                 return f;
             }
         }
