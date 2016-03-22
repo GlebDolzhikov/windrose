@@ -1,16 +1,16 @@
 <template name="flights">
     {{#if blockMode}}
         <div id="{{_id}}" style="width: {{width}}px; left: {{left}}px ;"
-             class="rect {{#if fixed}}fixed{{/if}} {{#if depSlot}}fixed{{/if}} {{#if arrSlot}}fixed{{/if}}">
+             class="rect {{#if fixed}}fixed{{/if}} extend  {{#if depSlot}}fixed{{/if}} {{#if arrSlot}}fixed{{/if}}">
 
-            <span>{{> editableText  collection="data" field="fltNumber"}}</span> <br/>
+            <span class="fltNumber">{{> editableText  collection="data" field="fltNumber"}} <br/></span>
             {{#each blocks}}
                 {{> blockShortView}}
             {{/each}}
         </div>
     {{else}}
         <div id="{{_id}}" style="width: {{width}}px; left: {{left}}px ;"
-             class="rect {{#if fixed}}fixed{{/if}} {{#if depSlot}}fixed{{/if}} {{#if arrSlot}}fixed{{/if}}">
+             class="rect {{#if fixed}}fixed{{/if}} {{#if depSlot}}fixed{{/if}} {{#if orange}} orange {{/if}} {{#if arrSlot}}fixed{{/if}}">
 
             <span>{{> editableText  collection="data" field="fltNumber"}}</span>
             <br/>
@@ -19,7 +19,7 @@
             <span class='arrSlot'
                   style="{{#if arrSlot}}text-decoration: underline; {{/if}}float:right;">{{arrTimeFormat}}</span>
             <br/>
-         <span class="textRow"> {{> editableText  collection="data" field="direction"}}
+         <span class="textRow"> {{> editableText  collection="data" field="direction" beforeUpdate="callSplit"}}
          </span>
         </div>
     {{/if}}

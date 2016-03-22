@@ -7,17 +7,24 @@ Template.flights.events({
         }
         var thisObj = this;
         if (e.shiftKey) {
-            Meteor.call('fltFixToggle', e.target.id, function (error, result) {
-                var me = $("#" + e.target.id);
+            var me = $("#" + e.target.id);
+            var isOrange = me.hasClass("orange");
+
+            Meteor.call('fltFixToggle', e.target.id, isOrange, function (error, result) {
+
                 if (result) {
                     me.resizable({
                         disabled: false
                     }).addClass("orange");
                 } else {
-                    me.resizable({
-                        disabled: true
-                    }).removeClass("orange");
-                    Meteor.call("updFltLength", thisObj.direction, thisObj._id)
+                    me.removeClass("orange");
+                    Meteor.call("updFltLength", thisObj.direction, thisObj._id, function (error, result) {
+                        if (result) {
+                            me.resizable({
+                                disabled: true
+                            })
+                        }
+                    })
                 }
             });
         }
