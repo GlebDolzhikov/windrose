@@ -1,91 +1,30 @@
-<template name="sked">
-    {{>sidebar}}
-    <div id={{_id}} class="countainer">
-        <h1 style='display: none' class="title">{{title}}.</h1>
-    <div class="nalet">
-        <div title="Щоб обнулити - зроби дабл клik" class="wrapper" id="setSkedRangeWrapper" >
-            <div id="jrange" class="dates">
-                <input  id="setSkedRange" type="button" value="{{#if range}}{{#each range}}{{this}}  {{/each}} {{else}}Задати перiод {{/if}}" />
-                <div></div>
-            </div>
-
-        </div>
-    <ul>
-    {{#each bort}}
-    <li>
-        {{>nalet}}
-    </li>
-    {{/each}}
-    </ul>
-    </div>
-        {{#each week}}
-            {{> day}}
-        {{/each}}
-    </div>
-</template>
-
-<template name="nalet">
-   <span>Загальний наліт за перiод по {{bort}}: {{ttlDuration.ttl}} годин;</span><br/>
-    {{#if range}}<span class="small-text">Наліт по мicяцях:{{#each ttlDuration.month}}{{#if this}} {{months @index}} - {{this}} годин, {{/if}} {{/each}}</span><br/>{{/if}}
-</template>
-
-<template name="day">
-    <div class="dayName" id="{{_id}}">
-        <div class="dayString"> <h4>{{dayToString}}</h4> </div>
-        {{#each bort}}
-            {{> borts}}
-        {{/each}}
-    </div>
-</template>
-
-<template name="hour">
-    <div class="hour no-print">{{hour}}</div>
-</template>
-
-
 <template name="flights">
-        {{#if blockMode}}
-        <div  id="{{_id}}" style="width: {{width}}px; left: {{left}}px ;" class="rect {{#if fixed}}fixed{{/if}} {{#if depSlot}}fixed{{/if}} {{#if arrSlot}}fixed{{/if}}">
+    {{#if blockMode}}
+        <div id="{{_id}}" style="width: {{width}}px; left: {{left}}px ;"
+             class="rect {{#if fixed}}fixed{{/if}} {{#if depSlot}}fixed{{/if}} {{#if arrSlot}}fixed{{/if}}">
 
-            <span>{{> editableText  collection="data" field="fltNumber"}}</span>   <br/>
+            <span>{{> editableText  collection="data" field="fltNumber"}}</span> <br/>
             {{#each blocks}}
                 {{> blockShortView}}
             {{/each}}
         </div>
-        {{else}}
-        <div  id="{{_id}}" style="width: {{width}}px; left: {{left}}px ;" class="rect {{#if fixed}}fixed{{/if}} {{#if depSlot}}fixed{{/if}} {{#if arrSlot}}fixed{{/if}}">
+    {{else}}
+        <div id="{{_id}}" style="width: {{width}}px; left: {{left}}px ;"
+             class="rect {{#if fixed}}fixed{{/if}} {{#if depSlot}}fixed{{/if}} {{#if arrSlot}}fixed{{/if}}">
 
             <span>{{> editableText  collection="data" field="fltNumber"}}</span>
             <br/>
-            <span class='depSlot' style="{{#if depSlot}}text-decoration: underline; {{/if}}float:left;">{{depTime}}</span>
-            <span class='arrSlot' style="{{#if arrSlot}}text-decoration: underline; {{/if}}float:right;">{{arrTimeFormat}}</span>
+            <span class='depSlot'
+                  style="{{#if depSlot}}text-decoration: underline; {{/if}}float:left;">{{depTime}}</span>
+            <span class='arrSlot'
+                  style="{{#if arrSlot}}text-decoration: underline; {{/if}}float:right;">{{arrTimeFormat}}</span>
             <br/>
          <span class="textRow"> {{> editableText  collection="data" field="direction"}}
          </span>
         </div>
-        {{/if}}
-
+    {{/if}}
 </template>
 
 
-<template name="borts">
-    <div class="bort">
-        <div class="left_col">{{> editableText  collection="data" field="bort"}} </div>
 
-        <div class="time_line">
-            {{#each time}}
-                {{> hour}}
-            {{/each}}
-        </div>
-
-        <div class="day"  id="{{_id}}" onmousedown="return false" onselectstart="return false">
-            {{#each flight}}
-                {{> flights}}
-            {{/each}}
-        </div>
-       <!-- <div class="duration">{{ttlDuration}} годин</div>-->
-        <div datafld="{{_id}}" class="editBort no-print">&#9881;</div>
-        <div datafld="{{_id}}" class="delBort no-print">&times;</div>
-    </div>
-</template>
 

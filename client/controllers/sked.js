@@ -1,13 +1,13 @@
 Template.sked.helpers({
-    week:function(){
-        return Data.find({name:'day'},{sort:{day:1}});
+    week: function () {
+        return Data.find({name: 'day'}, {sort: {day: 1}});
     },
-    bort:function(){
+    bort: function () {
         if (this._id) {
             return Data.find({
                 name: 'bort',
                 skedId: this._id
-            },{sort:{position:1}});
+            }, {sort: {position: 1}});
         }
     }
 });
@@ -20,31 +20,33 @@ Template.sked.onRendered(function () {
             changeMonth: true,
             changeYear: true,
             showButtonPanel: true,
-            beforeShowDay: function ( date ) {
+            beforeShowDay: function (date) {
                 return [true, ( (date.getTime() >= Math.min(prv, cur) && date.getTime() <= Math.max(prv, cur)) ? 'date-range-selected' : '')];
             },
-            onSelect: function ( dateText, inst ) {
+            onSelect: function (dateText, inst) {
                 var d1, d2;
                 prv = cur;
                 cur = (new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay)).getTime();
-                if ( prv == -1 || prv == cur ) {
+                if (prv == -1 || prv == cur) {
                     prv = cur;
-                    $('#jrange input').val( dateText );
+                    $('#jrange input').val(dateText);
                 } else {
-                    d1 = $.datepicker.formatDate( 'dd/mm/yy', new Date(Math.min(prv,cur)), {} );
-                    d2 = $.datepicker.formatDate( 'dd/mm/yy', new Date(Math.max(prv,cur)), {} );
-                    $('#jrange input').val( d1+' - '+d2 );
+                    d1 = $.datepicker.formatDate('dd/mm/yy', new Date(Math.min(prv, cur)), {});
+                    d2 = $.datepicker.formatDate('dd/mm/yy', new Date(Math.max(prv, cur)), {});
+                    $('#jrange input').val(d1 + ' - ' + d2);
                     var id = $(".countainer").attr('id');
-                    Meteor.call('setSkedRange',id,d1,d2)
+                    Meteor.call('setSkedRange', id, d1, d2)
                 }
             },
-            onChangeMonthYear: function ( year, month, inst ) {
+            onChangeMonthYear: function (year, month, inst) {
                 //prv = cur = -1;
             },
-            onAfterUpdate: function ( inst ) {
+            onAfterUpdate: function (inst) {
                 $('<button type="button" class="ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all" data-handler="hide" data-event="click">Done</button>')
                     .appendTo($('#jrange div .ui-datepicker-buttonpane'))
-                    .on('click', function () { $('#jrange div').hide(); });
+                    .on('click', function () {
+                        $('#jrange div').hide();
+                    });
             }
         })
         .position({
@@ -57,17 +59,17 @@ Template.sked.onRendered(function () {
         var v = this.value,
             d;
         try {
-            if ( v.indexOf(' - ') > -1 ) {
+            if (v.indexOf(' - ') > -1) {
                 d = v.split(' - ');
-                prv = $.datepicker.parseDate( 'dd/mm/yy', d[0] ).getTime();
-                cur = $.datepicker.parseDate( 'dd/mm/yy', d[1] ).getTime();
-            } else if ( v.length > 0 ) {
-                prv = cur = $.datepicker.parseDate( 'dd/mm/yy', v ).getTime();
+                prv = $.datepicker.parseDate('dd/mm/yy', d[0]).getTime();
+                cur = $.datepicker.parseDate('dd/mm/yy', d[1]).getTime();
+            } else if (v.length > 0) {
+                prv = cur = $.datepicker.parseDate('dd/mm/yy', v).getTime();
             }
-        } catch ( e ) {
+        } catch (e) {
             cur = prv = -1;
         }
-        if ( cur > -1 )
+        if (cur > -1)
             $('#jrange div').datepicker('setDate', new Date(cur));
         $('#jrange div').datepicker('refresh').show();
     });
@@ -94,10 +96,10 @@ Template.sked.events({
     },
     'click .editBort': function (event) {
         var bortId = Data.findOne(event.target.attributes.datafld.nodeValue);
-        if(Session.get("blockMode")){
+        if (Session.get("blockMode")) {
             var text = (bortId.capacity ? bortId.capacity : "не задоно");
             swal({
-                title: "Задайте загальну кiлькiсть мicць для "+bortId.bort+":",
+                title: "Задайте загальну кiлькiсть мicць для " + bortId.bort + ":",
                 text: "Наразi: " + text,
                 type: 'input',
                 showCancelButton: true,
@@ -128,9 +130,9 @@ Template.sked.events({
     'click .open': function () {
 
     },
-    "dblclick #setSkedRange": function(e){
+    "dblclick #setSkedRange": function (e) {
         e.preventDefault()
         var id = $(".countainer").attr('id');
-        Meteor.call('setSkedRange',id)
+        Meteor.call('setSkedRange', id)
     }
 });

@@ -13,7 +13,7 @@ Template.layout.events({
     'click .newSked': function () {
         var input = prompt('Задайте назву, нового розкладу:');
 
-        Meteor.call('newSked',input, function (error, result) {
+        Meteor.call('newSked', input, function (error, result) {
             Router.go('/sked/' + result);
         });
 
@@ -29,9 +29,9 @@ Template.layout.events({
         }, function (input) {
             var direction = input.split(',')[0].toUpperCase();
             var time = parseInt(input.split(',')[1]);
-            var lastTime = Data.findOne({name:'time',direction:direction});
+            var lastTime = Data.findOne({name: 'time', direction: direction});
             if (lastTime) {
-                if(!confirm("Заданий напрям вже внесино у довiдник, з часом " + lastTime.time + "хвилин. Перезаписати новим часом?")) {
+                if (!confirm("Заданий напрям вже внесино у довiдник, з часом " + lastTime.time + "хвилин. Перезаписати новим часом?")) {
                     return;
                 }
                 swal("Час поновлено!",
@@ -39,7 +39,7 @@ Template.layout.events({
                     "success");
             }
             Meteor.call('addTime', direction, time);
-            Meteor.call('updAllFltLength',direction,time,function(e,r) {
+            Meteor.call('updAllFltLength', direction, time, function (e, r) {
                 if (r) {
                     $('.fixed').resizable({
                         disabled: true
@@ -57,11 +57,11 @@ Template.layout.events({
             link.click();
         });
     },
-    'click  #myonoffswitch' :function(){
+    'click  #myonoffswitch': function () {
         var checked = $(".onoffswitch-checkbox")[0].checked;
-        Session.set("blockMode",checked);
+        Session.set("blockMode", checked);
     },
-    'click  .addBlock' :function(){
+    'click  .addBlock': function () {
         var flightId = Data.findOne(Session.get("chosenFlight"))._id;
 
         Meteor.call('addBlock', null, flightId);
@@ -69,56 +69,56 @@ Template.layout.events({
 });
 
 Template.layout.helpers({
-    skedInfo: function(){
-        return Data.find({name:'time'},{sort:{direction:1}})
+    skedInfo: function () {
+        return Data.find({name: 'time'}, {sort: {direction: 1}})
     },
-    skedListObj:function(){
-        return Data.find({name:'sked'},{sort:{cretedAt:-1}});
+    skedListObj: function () {
+        return Data.find({name: 'sked'}, {sort: {cretedAt: -1}});
     },
-    blockMode: function(){
+    blockMode: function () {
         return Session.get("blockMode");
     },
-    blocks: function(){
-        return Data.find({name:"block",flight:Session.get("chosenFlight")})
+    blocks: function () {
+        return Data.find({name: "block", flight: Session.get("chosenFlight")})
     },
-    flightNum: function(){
-        if(Session.get("chosenFlight")) {
+    flightNum: function () {
+        if (Session.get("chosenFlight")) {
             var fltObj = Data.findOne(Session.get("chosenFlight"));
-            if(fltObj){
+            if (fltObj) {
                 return fltObj.fltNumber;
             }
         }
     },
-    bortName:function(){
+    bortName: function () {
         var fltObj = Data.findOne(Session.get("chosenFlight"));
-        if(fltObj){
+        if (fltObj) {
             var bortId = fltObj.bort;
             var bortObj = Data.findOne(bortId);
-            if(bortObj){
+            if (bortObj) {
                 return bortObj.bort
             }
         }
     },
-    bortCapacity:function(){
+    bortCapacity: function () {
         var fltObj = Data.findOne(Session.get("chosenFlight"));
-        if(fltObj){
+        if (fltObj) {
             var bortId = fltObj.bort;
             var bortObj = Data.findOne(bortId);
-            if(bortObj){
+            if (bortObj) {
                 return bortObj.capacity
             }
         }
     },
-    bortOpen:function(){
+    bortOpen: function () {
         var fltObj = Data.findOne(Session.get("chosenFlight"));
-        if(fltObj){
+        if (fltObj) {
             var bortId = fltObj.bort;
             var bortObj = Data.findOne(bortId);
-            if(bortObj){
+            if (bortObj) {
                 var total = 0;
-                Data.find({"name":"block",flight:Session.get("chosenFlight")}).forEach(function(blockObj){
-                    if(!isNaN(blockObj.amount)){
-                        total +=  parseInt(blockObj.amount)
+                Data.find({"name": "block", flight: Session.get("chosenFlight")}).forEach(function (blockObj) {
+                    if (!isNaN(blockObj.amount)) {
+                        total += parseInt(blockObj.amount)
                     }
 
                 });

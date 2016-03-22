@@ -1,0 +1,39 @@
+<template name="borts">
+    <div class="bort">
+        <div class="left_col">{{> editableText  collection="data" field="bort"}} </div>
+
+        <div class="time_line">
+            {{#each time}}
+                {{> hour}}
+            {{/each}}
+        </div>
+
+        <div class="day" id="{{_id}}" onmousedown="return false" onselectstart="return false">
+            {{#each flight}}
+                {{> flights}}
+            {{/each}}
+        </div>
+        <!-- <div class="duration">{{ttlDuration}} годин</div>-->
+        <div datafld="{{_id}}" class="editBort no-print">&#9881;</div>
+        <div datafld="{{_id}}" class="delBort no-print">&times;</div>
+    </div>
+</template>
+
+<template name="nalet">
+    <span>Загальний наліт за перiод по {{bort}}: {{ttlDuration.ttl}} годин;</span><br/>
+    {{#if range}}<span class="small-text">Наліт по мicяцях:{{#each ttlDuration.month}}{{#if this}} {{months @index}}
+        - {{this}} годин, {{/if}} {{/each}}</span><br/>{{/if}}
+</template>
+
+<template name="day">
+    <div class="dayName" id="{{_id}}">
+        <div class="dayString"><h4>{{dayToString}}</h4></div>
+        {{#each bort}}
+            {{> borts}}
+        {{/each}}
+    </div>
+</template>
+
+<template name="hour">
+    <div class="hour no-print">{{hour}}</div>
+</template>

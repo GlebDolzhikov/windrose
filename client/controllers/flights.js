@@ -144,7 +144,7 @@ Template.flights.helpers({
     blockMode: function () {
         return Session.get("blockMode")
     },
-    blocks: function(){
-        return Data.find({name:"block",flight:this._id})
+    blocks: function () {
+        return Data.find({name: "block", flight: this._id})
     }
 });
