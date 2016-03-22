@@ -1,0 +1,137 @@
+<template name="help">
+    <div id="help" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Довiдка:</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="user-help">
+                        <h4>
+                        Работа з розкладом:
+                    </h4>
+                        <li>Кожен розклад э унiкальним носiєм iнформацii та маэ власнi записи рейсiв, бортiв,
+                            замовникiв,
+                            нотаток у чатi. Виключення становить лише довiдник тайм-блокiв.
+                        </li>
+
+                        <h4>
+                            Работа з рейсами:
+                        </h4>
+                        <ul>
+                            <li>Створити рейс - подвійний клік на ПС</li>
+                            <li>Скасувати рейс - подвійний клік по рейсу</li>
+                            <li>Копіювати рейс - перемістити рейс утримуючи клавішу <strong>CTRL</strong></li>
+                            <li>Створити зворотній лег для рейсу - перемістити рейс утримуючи клавішу
+                                <strong>ALT</strong>
+                            </li>
+                            <li>Розблокувати/заблокувати рейс для редагування графіку - клікнути по рейсу утримуючи
+                                клафішу
+                                <strong>Shift</strong></li>
+                        </ul>
+                        <h4>
+                            Работа з ПС:
+                        </h4>
+                        <ul>
+                            <li>Створити ПС - кнопка у верхньому меню "Додати ПС"</li>
+                            <li>Видалити ПС - хрестик справа вiд ПС</li>
+                            <li>Задати порядок вiдображення ПС - колешятко справа вiд ПС</li>
+                            <li>Задати назву ПС - клiк по назвi</li>
+                        </ul>
+                        <h4>
+                            Работа з блоками:
+                        </h4>
+                        <ul>
+                            <li><strong>Увага, у режимi работи з блоками усе редагування рейсiв вiдключено</strong></li>
+                            <li>Задати максимальну кiлькiсть мiсць по ПС - колешятко справа вiд ПС (режим работи з
+                                блоками
+                                має бути увiмкненно)
+                            </li>
+                            <li>Задати замовникiв - кнопка "Замовники"</li>
+                            <li>Задати блоки по рейсу - клiк по рейсу, aбо безпосередньо по кiлькостi мicць у загальному
+                                экранi
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="dev-help" style="display: none;">
+                        <h4>Data structure:</h4>
+                        <pre>
+                        <code>
+sked:
+"_id":"rmjCopExq47XuNqCT", //id is match with DOM ID of element
+"name":"sked",
+"index":true,
+"title":"Базовий розклад",
+"createdAt":"Mon Dec 21 2015 18:12:14 GMT+0200 (EET)",
+"range":[
+"01/03/2016",
+"31/03/2016"
+],
+"rangeArr":null
+
+day: // this objects made with fixture, they are have only 7 amount
+"_id":"rDa3vFvDD4uwvJiEJ",
+"name":"day",
+"day":2
+
+bort:
+"_id":"oknJaTfJT7CpJQrbq", //id is match with DOM ID
+"name":"bort",
+"bort":"A320",
+"skedId":"rmjCopExq47XuNqCT", // linked with sked obj
+"createdAt":"Wed Feb 24 2016 16:21:58 GMT+0200 (EET)",
+"capacity":218
+"position":1
+
+flight:
+"_id":"xonjnyrcmeyYKeR3y",/id is match with DOM ID
+"name":"flight",
+"width":180, // *3/5 give duration
+"left":537,
+"direction":"AYT KBP",
+"bort":"SX5LqGWkgw4q7sA8P",  // linked with bort obj
+"depTime":"12:50",
+"arrTime":"17:50",
+"day":"xAxayhQfxxKJWMp5n",  // linked with day obj
+"fltNumber":"7W 7012",
+"skedId":"rmjCopExq47XuNqCT",  // linked with sked obj
+"dayNum":1,
+"depSlot":false, //forbid draggable
+"arrSlot":false, //forbid draggable
+"fixed":true, // this key true if direction match to one of time obj - forbid resize
+"range":[
+"01-03-2016",
+"31-03-2016"
+],
+"singleDays":false
+
+
+company:
+"_id":"kcQqnzYyjpkbnveJy",
+"company":"AEROPLAN",
+"name":"company",
+"sked":"rmjCopExq47XuNqCT" // linked to one sked
+
+block:
+"_id":"EZq3DX2ZnWXFHj4DJ",
+"name":"block",
+"company":"Гамалия",
+"flight":"vNHrD2b2ryMfECtkd", // linked to one  flight
+"amount":"40"
+
+time: //dovidnik
+"_id":"2eLmJ6yyLcPYfH9jP",
+"name":"time",
+"time":" 105",
+"direction":"KBP TAT" // linked through direction
+                        </code>
+                        </pre>
+                    </div>
+                    <div class="dev-help-btn btn" onclick="$('.dev-help').toggle();$('.user-help').toggle();$(this).toggleText('Довiдка юзера','Довiдка для разробника')">Довiдка для разробника</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
