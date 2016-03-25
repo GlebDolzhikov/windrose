@@ -33,6 +33,13 @@ initUi = function () {
         snap: ".day",
         snapTolerance: 25,
         snapMode: "inner",
+        start: function(){
+            var snapped = $(this).data('draggable').snapElements;
+            snapped.forEach(function(el){
+                el.width = 1000000;
+                el.left = -50000;
+            });
+        },
         revert: function (event, ui) {
             if (Data.findOne($(this)[0].id).arrSlot || Data.findOne($(this)[0].id).depSlot || Session.get("blockMode")) {
                 return true;
